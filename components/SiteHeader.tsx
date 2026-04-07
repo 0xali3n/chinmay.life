@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { navLinks, siteMeta } from "@/lib/content";
 
@@ -44,6 +45,7 @@ function useActiveSectionHref() {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const activeHref = useActiveSectionHref();
   const { head, tail } = splitBrand(siteMeta.brand);
 
@@ -81,16 +83,25 @@ export function SiteHeader() {
 
         <nav className="mx-auto hidden min-[820px]:flex flex-1 items-center justify-center gap-0.5 px-2">
           {navLinks.map((link) => {
-            const isActive = activeHref === link.href;
+            const isRoute = link.href.startsWith("/") && !link.href.startsWith("/#");
+            const isActive = isRoute ? pathname === link.href : activeHref === link.href;
+            const className = `rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors ${
+              isActive
+                ? "bg-blue-600 text-white shadow-sm shadow-blue-600/25"
+                : "text-slate-600 hover:bg-blue-50 hover:text-blue-700"
+            }`;
+            if (isRoute) {
+              return (
+                <Link key={link.href} href={link.href} className={className}>
+                  {link.label}
+                </Link>
+              );
+            }
             return (
               <motion.a
                 key={link.href}
                 href={link.href}
-                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors ${
-                  isActive
-                    ? "bg-blue-600 text-white shadow-sm shadow-blue-600/25"
-                    : "text-slate-600 hover:bg-blue-50 hover:text-blue-700"
-                }`}
+                className={className}
                 whileHover={{ y: -0.5 }}
                 transition={{ type: "spring", stiffness: 450, damping: 28 }}
               >
@@ -140,20 +151,22 @@ export function SiteHeader() {
           className="pointer-events-auto mt-2 w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200/90 bg-white/85 p-2 shadow-lg backdrop-blur-2xl min-[820px]:hidden"
         >
           <div className="flex flex-col">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`rounded-xl px-4 py-3 text-sm font-medium ${
-                  activeHref === link.href
-                    ? "bg-blue-600 text-white"
-                    : "text-slate-700 hover:bg-blue-50 hover:text-blue-700"
-                }`}
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isRoute = link.href.startsWith("/") && !link.href.startsWith("/#");
+              const isActive = isRoute ? pathname === link.href : activeHref === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`rounded-xl px-4 py-3 text-sm font-medium ${
+                    isActive ? "bg-blue-600 text-white" : "text-slate-700 hover:bg-blue-50 hover:text-blue-700"
+                  }`}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         </motion.nav>
       ) : null}

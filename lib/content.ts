@@ -39,7 +39,7 @@ export const footerSocialLinks = [
 export const navLinks = [
   { label: "Experience", href: "#experience" },
   { label: "Achievements", href: "#achievements" },
-  { label: "Projects", href: "#projects" },
+  { label: "Projects", href: "/projects" },
   { label: "Notes", href: "#perspectives" },
   { label: "Contact", href: "#contact" },
 ] as const;
@@ -110,14 +110,11 @@ export const experienceItems = [
     logoObjectFit: "cover" as const,
     /** White circular mask behind cover-cropped logo (company mark on light art). */
     logoCoverLight: true as const,
-    summaryParagraphs: [
-      "Internship at Pravinya Infotech with my project team on AdGenAI: we divided the stack, kept demos and milestones moving, and helped each other through integration and reviews. Official certificate and industry report are attached below.",
-    ] as const,
+    summaryParagraphs: [] as const,
     bullets: [
       'AI Pipeline Engineering: Developed "AdGenAI," an automated marketing asset generator utilizing a React.js frontend, Flask backend, and MongoDB database architecture.',
       "Generative AI Integration: Integrated Google Gemini and Imagen 3 APIs to process raw product imagery and user prompts, successfully generating theme-aligned, production-ready advertisements and posters.",
       "System Optimization: Designed a scalable system incorporating AWS S3 for asset storage and robust API error handling, operating effectively within an agile development team.",
-      "Collaboration: Worked closely with my team on ownership, code review, and unblocking—host supervision and sign-off as required for the internship.",
     ] as const,
     internshipDocuments: [
       {
@@ -237,136 +234,207 @@ export const projectsContent = [
 ] as const;
 
 /**
- * Competition ledger — photos live in `public/achivements/`. Each item can list 0–2 `images` and an
- * optional `link` (e.g. LinkedIn media viewer). Keep prizing honest vs `public/cv.pdf`; dummy rows
- * below are placeholders until you swap copy and assets.
+ * Competition ledger — `track` labels the focus column; `built` / `stack` power the detail modal.
+ * Sum in stats excludes undisclosed pool values (e.g. some sponsor awards); bump `prize-money` if you add figures.
  */
 export const achievementsContent = {
   eyebrow: "Competitions" as const,
   title: "Achievements" as const,
-  subtitle:
-    "Short write-ups in plain English: where it ran, what we built, what it actually did, and what we came away with. The heading and year above each card carry the formal name and date so the text below does not repeat them.",
-  cvHref: "/cv.pdf" as const,
   stats: [
     {
-      id: "indexed",
-      label: "Results indexed",
-      value: "",
-      hint: "Auto-count of cards below — add rows in this file as your CV grows.",
+      id: "prize-money",
+      value: "$12,700+",
+      label: "Prize money secured",
     },
     {
-      id: "focus",
-      label: "Focus",
-      value: "Web3 · AI · Security",
-      hint: "Typical tracks you compete in.",
+      id: "podiums",
+      value: "8+",
+      label: "Wins & podiums",
+      pairValue: "20+" as const,
+      pairLabel: "Hackathons entered" as const,
     },
     {
-      id: "span",
-      label: "Timeline",
-      value: "2023 — present",
-      hint: "First highlighted result through latest.",
+      id: "ecosystems",
+      value: "Aptos, Sui, EVM",
+      label: "Core ecosystems",
     },
     {
-      id: "cv",
-      label: "Source of truth",
-      value: "CV (PDF)",
-      hint: "Same file as the header Resume button.",
+      id: "tenure",
+      value: "3+ yrs",
+      label: "Active Web3 building",
     },
   ] as const,
   items: [
     {
+      id: "very-hackathon-2026",
+      ecosystem: "VeryChain · DoraHacks",
+      track: "VeryChain · Gasless social · Zory",
+      event: "VERY Hackathon",
+      when: "Jan 2026",
+      built:
+        "I built Zory for the VERY hackathon on VeryChain. It's a social app with a feed, quests, a lottery, and swaps — people use it without topping up gas first because fees are sponsored. The full write-up and demo are on DoraHacks.",
+      stack:
+        "React, a few Solidity contracts on VeryChain, Wepin for login, Supabase in the back. $1k track win.",
+      prize: "Winner · $1,000" as string | null,
+      productLink: {
+        href: "https://dorahacks.io/buidl/38096",
+        label: "Product · Zory",
+      } as const,
+      eventLink: {
+        href: "https://dorahacks.io/hackathon/veryhackathon",
+        label: "Hackathon · VERY",
+      } as const,
+    },
+    {
+      id: "build-on-aptos-meetup-2025",
+      ecosystem: "Aptos · DeFi Trading",
+      track: "Aptos Move · Copy trading (Copiabel)",
+      event: "Build on Aptos Hackathon",
+      when: "Dec 2025",
+      built:
+        "For Rise In's Build on Aptos I worked on Copiabel — copy trading on Move where the real execution goes through Decibel Trade's infra. We came second runner-up and won $1,500.",
+      stack:
+        "Move, TypeScript, Decibel stack. Rise In hackathon.",
+      prize: "2nd runner-up · $1,500" as string | null,
+      eventLink: {
+        href: "https://www.risein.com/programs/build-on-aptos-hackathon",
+        label: "Hackathon · Rise In",
+      } as const,
+      resultLink: {
+        href: "https://x.com/riseinweb3/status/1995513985337041199",
+        label: "Results · X",
+      } as const,
+    },
+    {
+      id: "aptos-ctrlmove-2025",
+      ecosystem: "Aptos · Kana Perps",
+      track: "Kana Perps · Bounty · Social Trade",
+      event: "CTRL+MOVE Hackathon",
+      when: "Oct 2025",
+      built:
+        "At CTRL+MOVE I shipped Social Trade on Aptos — you follow someone's perp trades instead of placing everything by hand. Got the $2,500 Kana Labs bounty.",
+      stack:
+        "Aptos, Kana perps, small web app — live links on the Dora buidl.",
+      prize: "Bounty · $2,500" as string | null,
+      productLink: {
+        href: "https://dorahacks.io/buidl/34158",
+        label: "Product · Social Trade",
+      } as const,
+      eventLink: {
+        href: "https://dorahacks.io/hackathon/aptos-ctrlmove-hackathon/detail",
+        label: "Hackathon · CTRL+MOVE",
+      } as const,
+    },
+    {
       id: "ethglobal-agentic",
       ecosystem: "ETHGlobal · AgentKit",
+      track: "Coinbase AgentKit · Multi-chain agents",
       event: "ETHGlobal — Agentic Ethereum",
-      placement:
-        "This hackathon ran online in February on ETHGlobal's Agentic Ethereum track. We built W3Chat.io: you talk to it like a chat app and it handles sends, swaps, bridging, NFT mints, timed jobs, and pulls live market or on-chain info so you are not tab-hopping across tools. We cleared round two and won the Coinbase Developer Platform AgentKit pool prize. OnchainKit, AgentKit, and Hyperlane did most of the heavy lifting.",
+      when: "Feb 2025",
+      built:
+        "For ETHGlobal Agentic Ethereum I made W3Chat.io. You just chat with it and it handles sends, swaps, bridging, mints, and a few timed jobs on chain. It picked up Coinbase's AgentKit pool prize — the showcase page has the proper write-up.",
+      stack:
+        "Next.js, Coinbase AgentKit, OnchainKit, Hyperlane where bridging matters.",
       prize: "Round 2 · Coinbase pool" as string | null,
-      year: "2025",
-      images: ["/achivements/W3chat.png"] as const,
-      link: {
+      eventLink: {
+        href: "https://ethglobal.com/events/agents",
+        label: "Hackathon · Agentic Ethereum",
+      } as const,
+      resultLink: {
         href: "https://ethglobal.com/showcase/w3chat-io-d1sqn",
-        label: "ETHGlobal showcase",
+        label: "Results · Showcase",
       } as const,
     },
     {
       id: "supra-movers",
       ecosystem: "Supra · SupraScan",
+      track: "Supra L1 · Explorer · indexer API",
       event: "Supra Movers Hackathon",
-      placement:
-        "Supra Movers was online in January. I built SupraScan.fun — a block explorer and API for Supra — so anyone can look up assets, pools, and transactions the same way you would on a bigger-chain explorer, just tuned for Supra. Our team placed third and took $2,000. Supra Labs shared the launch on X; I keep posting updates at @SupraScan.",
+      when: "Jan 2025",
+      built:
+        "At Supra Movers I built SupraScan — a simple explorer for Supra plus an API keys flow so people can query balances, txs, and pools. Placed third and $2,000; Supra shared it on X afterward.",
+      stack:
+        "React, Next, Supra RPC, stuff we indexed ourselves. Third place.",
       prize: "3rd · $2,000" as string | null,
-      year: "2025",
-      images: ["/achivements/supra.png"] as const,
-      link: {
-        href: "https://x.com/SUPRA_Labs/status/1890055992479543707",
-        label: "Twitter",
+      productLink: {
+        href: "https://devfolio.co/projects/suprascanfun-d236",
+        label: "Product · SupraScan (Devfolio)",
       } as const,
-    },
-    {
-      id: "dummy-ai-sprint",
-      ecosystem: "AI / product",
-      event: "48h AI product sprint (placeholder)",
-      placement:
-        "Placeholder — honourable mention. When you replace it, write it like the others: where the sprint ran, what you built, what it did for users, and what you got.",
-      prize: null as string | null,
-      year: "2025",
+      eventLink: {
+        href: "https://supra-movers-hackathon.devfolio.co/",
+        label: "Hackathon · Supra Movers",
+      } as const,
+      resultLink: {
+        href: "https://x.com/SUPRA_Labs/status/1890055992479543707",
+        label: "Results · Launch (X)",
+      } as const,
     },
     {
       id: "hh-goa-2024",
       ecosystem: "Diamante · HHG",
+      track: "Diamante · CryptoLuck · iGaming",
       event: "Hacker House Goa 2024",
-      placement:
-        "This one was a six-day in-person hack in Goa (4–9 August), run by HackVerseIND — thousands applied in round one, then a few hundred builders showed up across 100+ teams. We built around online casinos: players get privacy-friendly, decentralised gameplay without getting boxed into one country's rules. We won first on the Diamante track and the prize was $3,000.",
+      when: "Aug 2024",
+      built:
+        "At Hacker House Goa our team shipped CryptoLuck — a small on-chain casino style demo on Diamante with a few games and Garden handling deposits and withdrawals. We won first on the Diamante track with $3,000.",
+      stack:
+        "React, Node, Diamante wallet, Garden SDK. Built with CryptoD5.",
       prize: "1st — Diamante ($3k)" as string | null,
-      year: "2024",
-      images: ["/achivements/goa.jpg"] as const,
-      link: {
-        href: "https://www.linkedin.com/feed/update/urn:li:activity:7241153322584342529/",
-        label: "LinkedIn",
+      productLink: {
+        href: "https://devfolio.co/projects/cryptoluck-casino-bet-win-and-play-anonymously-5353",
+        label: "Product · CryptoLuck (Devfolio)",
       } as const,
-    },
-    {
-      id: "dummy-buildthon-2024",
-      ecosystem: "Campus / buildathon",
-      event: "Inter-college buildathon (placeholder)",
-      placement:
-        "Placeholder — top five. When you swap it in, say where it was held, what you built, how it worked, and what placement or prize you got, plus a link if you have one.",
-      prize: null as string | null,
-      year: "2024",
-    },
-    {
-      id: "dummy-security-ctf",
-      ecosystem: "Security",
-      event: "Regional CTF / cyber league (placeholder)",
-      placement:
-        "Demo row for second place — swap for the real story: host city or platform, what your team shipped or how you played the CTF, and a proof link or scoreboard when you have it.",
-      prize: "2nd (demo)" as string | null,
-      year: "2024",
-      link: { href: socialLinks.github, label: "GitHub (replace)" } as const,
+      eventLink: {
+        href: "https://hacker-house-goa.devfolio.co/",
+        label: "Hackathon · HH Goa",
+      } as const,
+      resultLink: {
+        href: "https://www.linkedin.com/feed/update/urn:li:activity:7241153322584342529/",
+        label: "Results · LinkedIn",
+      } as const,
     },
     {
       id: "sih-2023",
       ecosystem: "SIH · NTRO",
+      track: "NTRO · On-chain forensics",
       event: "Smart India Hackathon 2023 — Grand Finale",
-      placement:
-        "The NTRO track at SIH had its grand finale in person at Amity University in Noida. We built analysis tooling to help trace shady use of crypto — basically connecting dark-web leads to what you can still see on public ledgers. We made grand finalist; the work was always meant for investigators, not a consumer app.",
+      when: "Dec 2023",
+      built:
+        "For SIH 2023 grand finals I was on the NTRO problem — tracking abuse that touches crypto and the dark web. We built Python tooling to map flows and pack evidence so judges could follow the story.",
+      stack:
+        "Python, graphs, chain data. Grand finalist.",
       prize: "Grand finalist" as string | null,
-      year: "2023",
-      images: ["/achivements/Sih.png"] as const,
-      link: { href: socialLinks.linkedin, label: "LinkedIn" } as const,
+      eventLink: {
+        href: "https://www.sih.gov.in/sih2023s",
+        label: "Hackathon · SIH 2023",
+      } as const,
+      resultLink: {
+        href: "https://www.linkedin.com/in/thechinmay07/overlay/1709597400549/single-media-viewer?profileId=ACoAADzbs6oBF5iFPHvSyzh3l6yB3WVVuR0dVc4",
+        label: "Results · LinkedIn",
+      } as const,
     },
     {
       id: "devhack-2023",
       ecosystem: "DeFiChain / Web3",
+      track: "DeFiChain.in · Learn · Earn · Governance",
       event: "DevHack 2023",
-      placement:
-        "It was DeFiChain-only: Bengaluru kickoff, ten days of building online, then an in-person final night with a mixer. Our team shipped a DeFi build on their stack. We were runner-up overall ($1,500) and also picked up the side-track win ($1,200).",
-      prize: "Runner-up + side track" as string | null,
-      year: "2023",
-      images: ["/achivements/devhack_Winner.JPG"] as const,
-      link: {
+      when: "Nov–Dec 2023",
+      built:
+        "At DevHack 2023 we launched DeFiChain.in — you do quests on chain, earn XP, turn it into DFI, stake, and vote. Runner-up overall plus another win on a side track.",
+      stack:
+        "React, ethers, DeFiChain MetaChain. Built with CryptoD5.",
+      prize: "Runner-up ($1,500) · Side track ($1,200)" as string | null,
+      productLink: {
+        href: "https://devfolio.co/projects/defichainin-learn-empower-and-earn-dollardfi-2ca8",
+        label: "Product · DeFiChain.in (Devfolio)",
+      } as const,
+      eventLink: {
+        href: "https://devhack2023.devfolio.co/",
+        label: "Hackathon · DevHack 2023",
+      } as const,
+      resultLink: {
         href: "https://www.linkedin.com/in/thechinmay07/overlay/1709597311921/single-media-viewer/?profileId=ACoAADzbs6oBF5iFPHvSyzh3l6yB3WVVuR0dVc4",
-        label: "LinkedIn",
+        label: "Results · LinkedIn",
       } as const,
     },
   ] as const,
@@ -382,7 +450,7 @@ export const perspectivesItems = [
   {
     title: "Hackathons: from DeFiChain quests to Supra explorers",
     excerpt:
-      "Runner-up and side-track winner at DevHack 2023 (DeFiChain), Grand Finalist at SIH 2023 (crypto / dark-web traceability), first prize on the Diamante track at Hacker House Goa 2024 — the Achievements grid has photos and links; projects below go deeper on builds.",
+      "Runner-up and side-track winner at DevHack 2023 (DeFiChain), Grand Finalist at SIH 2023 (crypto / dark-web traceability), first prize on the Diamante track at Hacker House Goa 2024 — the Achievements leaderboard summarizes results; projects below go deeper on builds.",
     href: socialLinks.devfolio,
   },
 ] as const;

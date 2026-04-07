@@ -1,93 +1,113 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { achievementsContent } from "@/lib/content";
 import { FadeIn } from "./FadeIn";
 
 type AchievementListItem = (typeof achievementsContent.items)[number];
 
-function StatIcon({ id }: { id: string }) {
-  const common = "h-5 w-5";
-  if (id === "indexed") {
+function getProductLink(item: AchievementListItem) {
+  return "productLink" in item ? item.productLink : undefined;
+}
+
+function getEventLink(item: AchievementListItem) {
+  return "eventLink" in item ? item.eventLink : undefined;
+}
+
+function getResultLink(item: AchievementListItem) {
+  return "resultLink" in item ? item.resultLink : undefined;
+}
+
+/** Row ↗: live product first, then result/proof, then program page. */
+function achievementPrimaryLink(item: AchievementListItem) {
+  return getProductLink(item) ?? getResultLink(item) ?? getEventLink(item);
+}
+
+const achLinkOutline =
+  "inline-flex min-h-10 flex-1 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-center text-xs font-semibold text-slate-800 shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-50 sm:flex-initial sm:justify-center";
+
+const achLinkSolid =
+  "inline-flex min-h-10 flex-1 items-center justify-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-center text-xs font-semibold text-white shadow-sm shadow-blue-600/25 transition-colors hover:bg-blue-700 sm:flex-initial sm:justify-center";
+
+function RowIcon({ index }: { index: number }) {
+  const kind = index % 3;
+  const cls = "h-6 w-6 shrink-0 text-slate-400";
+  if (kind === 0) {
     return (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9-13.5h-9M12 12h9m-9 6h9m-9-12h9M3.75 4.5h4.5v15h-4.5v-15z" />
+      <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M16.5 18.75h-9m4.5-13.5v6.75m3-6.75v6.75M4.5 19.5l1.62-8.955A2.25 2.25 0 018.288 9h7.424a2.25 2.25 0 012.168 1.545L19.5 19.5M6 22.5h12.75a.75.75 0 00.75-.75V19.5H5.25v2.25a.75.75 0 00.75.75zM9.75 9V6a2.25 2.25 0 012.25-2.25h.371c1.007 0 1.934.514 2.465 1.361l.188.319M9.75 9h4.5"
+        />
       </svg>
     );
   }
-  if (id === "focus") {
+  if (kind === 1) {
     return (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-      </svg>
-    );
-  }
-  if (id === "span") {
-    return (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v11.25c0 1.5 1.5 1.5 3 .75l4.5-2.25M6.75 3l-3 9m3-9l4.5 2.25M6.75 3l3 9m6-6.75v11.25c0 1.5-1.5 1.5-3 .75l-4.5-2.25m9-9.75l-3 9m3-9.75l-4.5 2.25m0 0L9.75 9" />
+      <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+        />
       </svg>
     );
   }
   return (
-    <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+    <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+      />
     </svg>
   );
 }
 
-function AchievementImages({
-  srcs,
-  eventLabel,
-}: {
-  srcs: readonly string[];
-  eventLabel: string;
-}) {
-  if (srcs.length === 0) return null;
-  if (srcs.length === 1) {
-    return (
-      <div className="relative aspect-[5/4] w-full overflow-hidden bg-slate-100 sm:aspect-[3/2]">
-        <Image
-          src={srcs[0]}
-          alt={`${eventLabel} — photo`}
-          fill
-          className="object-cover object-center"
-          sizes="(max-width: 640px) 100vw, 33vw"
-        />
-      </div>
-    );
+function PrizeHighlight({ text }: { text: string | null }) {
+  if (!text) {
+    return <span className="text-sm tabular-nums text-slate-400">—</span>;
   }
+  const parts = text.split(/(\$[0-9,.]+[kK]?)/gi);
   return (
-    <div className="grid w-full grid-cols-2 gap-0.5 bg-slate-200">
-      {srcs.slice(0, 2).map((src, i) => (
-        <div key={src} className="relative aspect-[4/5] bg-slate-100">
-          <Image
-            src={src}
-            alt={`${eventLabel} — photo ${i + 1}`}
-            fill
-            className="object-cover object-center"
-            sizes="(max-width: 640px) 50vw, 17vw"
-          />
-        </div>
-      ))}
-    </div>
+    <span className="inline-block w-full text-sm tabular-nums text-slate-800 md:text-right">
+      {parts.map((part, i) =>
+        /^\$[0-9,.]+[kK]?$/i.test(part) ? (
+          <span key={i} className="font-semibold tabular-nums text-blue-700">
+            {part}
+          </span>
+        ) : (
+          <Fragment key={i}>{part}</Fragment>
+        ),
+      )}
+    </span>
   );
 }
 
-function achievementImagesFor(item: AchievementListItem): readonly string[] {
-  return "images" in item ? item.images : [];
-}
-
-function achievementProof(item: AchievementListItem) {
-  return "link" in item ? item.link : undefined;
+function AchievementBulletList({ built, stack }: { built: string; stack: string }) {
+  return (
+    <ul className="space-y-2 text-left text-sm leading-relaxed text-slate-700">
+      <li className="relative pl-4 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-blue-600">
+        <span className="font-medium text-slate-800">Architecture: </span>
+        {built}
+      </li>
+      <li className="relative pl-4 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-slate-400">
+        <span className="font-medium text-slate-800">Stack: </span>
+        {stack}
+      </li>
+    </ul>
+  );
 }
 
 function AchievementDetailModal({ item, onClose }: { item: AchievementListItem; onClose: () => void }) {
-  const imgs = achievementImagesFor(item);
-  const proof = achievementProof(item);
+  const product = getProductLink(item);
+  const event = getEventLink(item);
+  const result = getResultLink(item);
+  const hasSecondaryAccent = Boolean(product || result);
+  const eventOutline = hasSecondaryAccent;
+  const resultOutline = Boolean(product);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -122,19 +142,17 @@ function AchievementDetailModal({ item, onClose }: { item: AchievementListItem; 
         initial={{ opacity: 0, y: 12, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", stiffness: 380, damping: 32 }}
-        className="relative z-10 flex max-h-[min(92vh,940px)] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-2xl shadow-slate-900/20"
+        className="relative z-10 w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-2xl shadow-slate-900/20"
       >
         <div className="flex shrink-0 items-start justify-between gap-3 border-b border-slate-100 bg-slate-50/90 px-4 py-3 sm:px-5">
           <div className="min-w-0 flex-1 pr-2">
-            <p className="text-[10px] font-semibold uppercase tracking-wide text-blue-600">{item.ecosystem}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">{item.track}</p>
             <h3 id="achievement-modal-title" className="mt-1 font-sans text-base font-semibold leading-snug text-slate-900 sm:text-lg">
               {item.event}
             </h3>
             <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
-              {item.year ? <span>{item.year}</span> : null}
-              {item.prize ? (
-                <span className="font-medium text-slate-700">{item.prize}</span>
-              ) : null}
+              {item.when ? <span className="whitespace-nowrap tabular-nums">{item.when}</span> : null}
+              {item.prize ? <PrizeHighlight text={item.prize} /> : null}
             </div>
           </div>
           <button
@@ -148,50 +166,55 @@ function AchievementDetailModal({ item, onClose }: { item: AchievementListItem; 
             </svg>
           </button>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto bg-slate-50/50">
-          {imgs.length > 0 ? (
-            <div className="space-y-3 border-b border-slate-100 bg-white p-3 sm:p-4">
-              {imgs.map((src) => (
-                <div key={src} className="flex justify-center rounded-xl border border-slate-200/90 bg-slate-100/80 p-2">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- modal: full-size achievement asset */}
-                  <img
-                    src={src}
-                    alt={`${item.event} — attachment`}
-                    className="max-h-[min(72vh,820px)] w-auto max-w-full rounded-lg object-contain"
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="border-b border-slate-100 bg-white px-4 py-8 text-center text-sm text-slate-500">
-              No image on file for this entry.
+        <div className="max-h-[min(70vh,520px)] overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
+          <AchievementBulletList built={item.built} stack={item.stack} />
+          {(event || product || result) && (
+            <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+              {event ? (
+                <a
+                  href={event.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={eventOutline ? achLinkOutline : achLinkSolid}
+                >
+                  {event.label}
+                  <span className={eventOutline ? "text-sm opacity-70" : "text-sm"} aria-hidden>
+                    ↗
+                  </span>
+                </a>
+              ) : null}
+              {product ? (
+                <a href={product.href} target="_blank" rel="noopener noreferrer" className={achLinkSolid}>
+                  {product.label}
+                  <span className="text-sm" aria-hidden>
+                    ↗
+                  </span>
+                </a>
+              ) : null}
+              {result ? (
+                <a
+                  href={result.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={resultOutline ? achLinkOutline : achLinkSolid}
+                >
+                  {result.label}
+                  <span className={resultOutline ? "text-sm opacity-70" : "text-sm"} aria-hidden>
+                    ↗
+                  </span>
+                </a>
+              ) : null}
             </div>
           )}
-          <div className="px-4 py-4 sm:px-5 sm:py-5">
-            <p className="text-sm leading-relaxed text-slate-700 text-pretty">{item.placement}</p>
-            {proof ? (
-              <a
-                href={proof.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm shadow-blue-600/25 transition-colors hover:bg-blue-700"
-              >
-                {proof.label}
-                <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </a>
-            ) : null}
-          </div>
         </div>
       </motion.div>
     </motion.div>
   );
 }
 
-/** Stats strip + outcome cards with optional photos and proof links. */
+/** Metric strip + data-dense competition leaderboard (no media). */
 export function AchievementsSection() {
-  const { eyebrow, title, subtitle, cvHref, stats, items } = achievementsContent;
+  const { eyebrow, title, stats, items } = achievementsContent;
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const selectedItem = useMemo(
@@ -216,77 +239,72 @@ export function AchievementsSection() {
           <h2 className="mt-2 font-sans text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl md:text-3xl">
             {title}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-[15px]">{subtitle}</p>
         </FadeIn>
 
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:gap-4">
-          {stats.map((stat, i) => {
-            const isCv = stat.id === "cv";
-            const displayValue = stat.id === "indexed" ? String(items.length) : stat.value;
-            const inner = (
-              <>
-                <div
-                  className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl ${
-                    isCv
-                      ? "bg-blue-600 text-white"
-                      : "bg-white text-blue-600 ring-1 ring-slate-200/90"
-                  }`}
-                >
-                  <StatIcon id={stat.id} />
-                </div>
-                <p className="font-sans text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
-                  {displayValue}
-                </p>
-                <p className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-[11px]">
-                  {stat.label}
-                </p>
-                <p className="mt-1.5 text-[11px] leading-snug text-slate-500">{stat.hint}</p>
-              </>
-            );
-
-            return (
-              <motion.div
-                key={stat.id}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-32px" }}
-                transition={{ duration: 0.35, delay: i * 0.04 }}
-                className="h-full"
-              >
-                {isCv ? (
-                  <Link
-                    href={cvHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-full flex-col rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 shadow-sm transition-colors hover:border-blue-200 hover:bg-blue-50/40"
-                  >
-                    {inner}
-                  </Link>
-                ) : (
-                  <div className="flex h-full flex-col rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 shadow-sm">
-                    {inner}
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.id}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-32px" }}
+              transition={{ duration: 0.35, delay: i * 0.04 }}
+              className="flex h-full flex-col rounded-2xl border border-slate-200/90 bg-gradient-to-b from-slate-50 to-white p-4 shadow-sm"
+            >
+              {"pairValue" in stat && stat.pairValue ? (
+                <div className="flex min-w-0 items-stretch gap-3">
+                  <div className="min-w-0 flex-1">
+                    <p className="font-sans text-lg font-semibold tracking-tight text-slate-900 sm:text-xl md:text-2xl">
+                      {stat.value}
+                    </p>
+                    <p className="mt-2 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-500 sm:text-[11px]">
+                      {stat.label}
+                    </p>
                   </div>
-                )}
-              </motion.div>
-            );
-          })}
+                  <div className="w-px shrink-0 bg-slate-200/90" aria-hidden />
+                  <div className="min-w-0 flex-1">
+                    <p className="font-sans text-lg font-semibold tracking-tight text-slate-900 sm:text-xl md:text-2xl">
+                      {stat.pairValue}
+                    </p>
+                    <p className="mt-2 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-500 sm:text-[11px]">
+                      {stat.pairLabel}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <p className="font-sans text-lg font-semibold tracking-tight text-slate-900 sm:text-xl md:text-2xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-2 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-500 sm:text-[11px]">
+                    {stat.label}
+                  </p>
+                </>
+              )}
+            </motion.div>
+          ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 overflow-hidden rounded-xl border border-slate-200/90 bg-white shadow-sm">
+          <div className="hidden border-b border-slate-200 bg-slate-50/80 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500 md:grid md:grid-cols-12 md:items-center md:gap-x-6 md:px-5">
+            <div className="col-span-4">Event</div>
+            <div className="col-span-3">Track · focus</div>
+            <div className="col-span-3 text-right">Placement &amp; prize</div>
+            <div className="col-span-2 text-right">When · link</div>
+          </div>
           {items.map((item, i) => {
-            const imgs = achievementImagesFor(item);
-            const proof = achievementProof(item);
+            const primary = achievementPrimaryLink(item);
             return (
-              <motion.article
+              <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 6 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.03 }}
+                viewport={{ once: true, margin: "-24px" }}
+                transition={{ duration: 0.3, delay: i * 0.02 }}
                 role="button"
                 tabIndex={0}
-                aria-label={`Open details: ${item.event}`}
-                className="flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-50/80 shadow-sm transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                aria-label={`Details: ${item.event}`}
+                className="grid cursor-pointer grid-cols-1 gap-2 border-b border-gray-200 px-4 py-3.5 transition-colors last:border-b-0 hover:bg-slate-50/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 md:grid-cols-12 md:items-center md:gap-x-6 md:px-5"
                 onClick={() => openAch(item)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -295,42 +313,38 @@ export function AchievementsSection() {
                   }
                 }}
               >
-                <AchievementImages srcs={imgs} eventLabel={item.event} />
-                <div className="flex flex-1 flex-col px-4 pb-5 pt-5">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="min-w-0 max-w-[65%] rounded-full border border-blue-100 bg-blue-50/80 px-2.5 py-1 text-[10px] font-semibold uppercase leading-none tracking-wide text-blue-800">
-                      {item.ecosystem}
-                    </span>
-                    {item.prize ? (
-                      <span className="shrink-0 text-right text-xs font-semibold leading-tight text-slate-800">
-                        {item.prize}
-                      </span>
-                    ) : null}
-                  </div>
-                  <h3 className="mt-3.5 font-sans text-sm font-semibold leading-snug text-slate-900 sm:text-base">
-                    {item.event}
-                  </h3>
-                  <p className="mt-2.5 line-clamp-4 flex-1 text-sm leading-relaxed text-slate-600">{item.placement}</p>
-                  <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-slate-100 pt-4">
-                    {item.year ? <p className="text-xs font-medium text-slate-400">{item.year}</p> : null}
-                    {proof ? (
-                      <a
-                        href={proof.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 underline-offset-2 hover:text-blue-700 hover:underline sm:ml-auto"
-                        onClick={(e) => e.stopPropagation()}
-                        onKeyDown={(e) => e.stopPropagation()}
-                      >
-                        {proof.label}
-                        <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                        </svg>
-                      </a>
-                    ) : null}
-                  </div>
+                <div className="flex items-start gap-3 md:col-span-4 md:items-center">
+                  <RowIcon index={i} />
+                  <span className="font-semibold leading-snug text-slate-900">{item.event}</span>
                 </div>
-              </motion.article>
+                <div className="pl-9 text-xs leading-snug text-slate-500 md:col-span-3 md:min-w-0 md:pl-0">{item.track}</div>
+                <div className="pl-9 md:col-span-3 md:min-w-0 md:pl-0 md:text-right">
+                  <PrizeHighlight text={item.prize} />
+                </div>
+                <div className="flex items-center justify-between gap-4 pl-9 md:col-span-2 md:justify-end md:pl-0">
+                  <span className="min-w-[4.5ch] max-w-[7.5rem] whitespace-nowrap text-right text-xs tabular-nums text-slate-500">
+                    {item.when ?? "—"}
+                  </span>
+                  {primary ? (
+                    <a
+                      href={primary.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={primary.label}
+                      aria-label={`${primary.label} (opens in new tab)`}
+                      className="shrink-0 text-base text-slate-400 transition-colors hover:text-blue-600"
+                      onClick={(e) => e.stopPropagation()}
+                      onKeyDown={(e) => e.stopPropagation()}
+                    >
+                      ↗
+                    </a>
+                  ) : (
+                    <span className="text-slate-200" aria-hidden>
+                      ↗
+                    </span>
+                  )}
+                </div>
+              </motion.div>
             );
           })}
         </div>
