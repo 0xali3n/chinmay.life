@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -55,27 +54,17 @@ export function SiteHeader() {
       <div className="pointer-events-auto flex w-full max-w-4xl items-center gap-1 sm:gap-2 rounded-full border border-slate-200/90 bg-white/75 px-2 py-1.5 pl-3 sm:pl-4 shadow-[0_8px_32px_-8px_rgba(15,23,42,0.12)] backdrop-blur-2xl backdrop-saturate-150 supports-[backdrop-filter]:bg-white/65">
         <motion.a
           href="#top"
-          className="group flex shrink-0 items-center gap-2 rounded-full py-1 pl-0.5 pr-1.5 sm:pr-2 transition-colors"
+          className="group flex shrink-0 items-center rounded-full py-1 pl-1 pr-2 transition-colors"
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
           transition={{ duration: 0.15 }}
           onClick={() => setOpen(false)}
         >
-          <span className="relative h-9 w-9 shrink-0 sm:h-10 sm:w-10">
-            <Image
-              src={siteMeta.navIconSrc}
-              alt={`${siteMeta.brand} icon`}
-              fill
-              className="object-contain object-center"
-              sizes="40px"
-              priority
-            />
-          </span>
-          <span className="flex items-baseline text-[15px] sm:text-base font-semibold tracking-tight">
-            <span className="text-slate-900 group-hover:text-blue-700 transition-colors">
+          <span className="flex items-baseline text-[15px] font-semibold tracking-tight sm:text-base">
+            <span className="text-slate-900 transition-colors group-hover:text-blue-700">
               {head}
             </span>
-            <span className="text-blue-600 group-hover:text-blue-700 transition-colors">
+            <span className="text-blue-600 transition-colors group-hover:text-blue-700">
               {tail}
             </span>
           </span>

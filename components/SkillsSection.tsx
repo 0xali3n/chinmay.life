@@ -40,6 +40,7 @@ export function SkillsSection() {
                 </div>
               </FadeIn>
             ))}
+
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { AchievementsSection } from "@/components/AchievementsSection";
 import { FooterContact } from "@/components/FooterContact";
 import { HeroSection } from "@/components/HeroSection";
-import { PerspectivesSection } from "@/components/PerspectivesSection";
+import { LanguagesSection } from "@/components/LanguagesSection";
 import { ProfileExperienceSection } from "@/components/ProfileExperienceSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -16,8 +16,8 @@ export default function Home() {
         <ProfileExperienceSection />
         <AchievementsSection />
         <ProjectsSection />
-        <PerspectivesSection />
         <SkillsSection />
+        <LanguagesSection />
         <FooterContact />
       </main>
     </>

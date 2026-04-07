@@ -39,8 +39,7 @@ export const footerSocialLinks = [
 export const navLinks = [
   { label: "Experience", href: "#experience" },
   { label: "Achievements", href: "#achievements" },
-  { label: "Projects", href: "/projects" },
-  { label: "Notes", href: "#perspectives" },
+  { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
@@ -49,10 +48,10 @@ export const heroContent = {
   greeting: "Hi, I'm",
   /** One line under your name */
   roleLine:
-    "Computer Science · Builder across Web3, intelligent interfaces, and security",
+    "Computer Science engineer focused on secure systems, intelligent interfaces, and applied AI",
   /** Short hero summary — keep scannable (2–4 sentences). */
   summary:
-    "I build full-stack and on-chain systems where interaction design, scalable data, and trust boundaries matter. My work bridges hard technical engineering and product execution, driving my transition into advanced academic research in HCI, AI, and Intelligent Systems.",
+    "I design and build full-stack systems where usability, data reliability, and trust boundaries are equally important. This portfolio supports my applications to German Master's programs and highlights project depth relevant to research, internships, and engineering roles.",
   primaryCta: { label: "Selected projects", href: "#projects" },
   secondaryCta: { label: "CV (PDF)", href: "/cv.pdf", external: true },
   imageAlt: "Chinmay Patil",
@@ -476,3 +475,22 @@ export const skillsContent = {
   ],
   Foundations: ["Computer networks", "OOP", "DSA", "MongoDB"],
 } as const;
+
+export const spokenLanguages = [
+  {
+    language: "English",
+    level: "Full Professional Proficiency (IELTS B2)",
+  },
+  {
+    language: "German",
+    level: "A1 (Actively learning, targeting A2 by Winter 2026)",
+  },
+  {
+    language: "Kannada",
+    level: "Native / Professional working proficiency",
+  },
+  {
+    language: "Hindi",
+    level: "Professional working proficiency",
+  },
+] as const;
