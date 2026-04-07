@@ -5,7 +5,26 @@ import Image from "next/image";
 import { heroContent, siteMeta } from "@/lib/content";
 
 /** Minimal centered hero: portrait on top, name + one-line role + short summary, CTAs — easy scan like template portfolios. */
-export function HeroSection() {
+export function HeroSection({ lang = "en" }: { lang?: "en" | "de" }) {
+  const t =
+    lang === "de"
+      ? {
+          greeting: "Hallo, ich bin",
+          roleLine:
+            "Informatikingenieur mit Fokus auf sichere Systeme, intelligente Interfaces und angewandte KI",
+          summary:
+            "Ich entwickle Full-Stack-Systeme, bei denen Usability, Datenzuverlässigkeit und Sicherheitsgrenzen gleichermaßen zählen. Dieses Portfolio unterstützt meine Bewerbungen für Masterprogramme in Deutschland sowie Praktika und Werkstudentenrollen.",
+          primaryCta: "Ausgewählte Projekte",
+          secondaryCta: "Lebenslauf (PDF)",
+        }
+      : {
+          greeting: heroContent.greeting,
+          roleLine: heroContent.roleLine,
+          summary: heroContent.summary,
+          primaryCta: heroContent.primaryCta.label,
+          secondaryCta: heroContent.secondaryCta.label,
+        };
+
   return (
     <section
       id="top"
@@ -38,7 +57,7 @@ export function HeroSection() {
           transition={{ duration: 0.4, delay: 0.06 }}
           className="mt-8 text-sm text-blue-600 font-semibold tracking-wide"
         >
-          {heroContent.greeting}
+          {t.greeting}
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
@@ -64,7 +83,7 @@ export function HeroSection() {
           transition={{ duration: 0.4, delay: 0.14 }}
           className="mt-3 text-sm sm:text-base text-blue-700 font-medium"
         >
-          {heroContent.roleLine}
+          {t.roleLine}
         </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -72,7 +91,7 @@ export function HeroSection() {
           transition={{ duration: 0.4, delay: 0.18 }}
           className="mt-5 text-sm sm:text-[15px] text-slate-600 leading-relaxed max-w-md mx-auto"
         >
-          {heroContent.summary}
+          {t.summary}
         </motion.p>
 
         <motion.div
@@ -87,7 +106,7 @@ export function HeroSection() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            {heroContent.primaryCta.label}
+            {t.primaryCta}
           </motion.a>
           <motion.a
             href={heroContent.secondaryCta.href}
@@ -98,7 +117,7 @@ export function HeroSection() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            {heroContent.secondaryCta.label}
+            {t.secondaryCta}
           </motion.a>
         </motion.div>
       </div>

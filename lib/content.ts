@@ -116,120 +116,21 @@ export const experienceItems = [
     ] as const,
     internshipDocuments: [
       {
-        label: "Certificate",
-        href: "/internship/01fe21bcs054.webp",
-        mediaKind: "image" as const,
-        downloadFilename: "Pravinya_completion_certificate.webp" as const,
+        label: "Internship certificate — Pravinya (PDF)",
+        href: "/internship/pravinya-internship-certificate.pdf",
+        mediaKind: "pdf" as const,
+        downloadFilename: "pravinya-internship-certificate.pdf" as const,
       },
       {
         label: "Industry report (PDF)",
-        href: "/internship/Chinmay_Internship_Project%20(1).pdf",
+        href: "/internship/pravinya-internship-industry-report.pdf",
         mediaKind: "pdf" as const,
-        downloadFilename: "Chinmay_Internship_Project.pdf" as const,
+        downloadFilename: "pravinya-internship-industry-report.pdf" as const,
       },
     ] as const,
   },
 ] as const;
 
-/**
- * Projects split by how you want reviewers to read them:
- * - Shipped & independent: not timed to a single hackathon (even if ideas started elsewhere).
- * - Hackathons & competitions: hack weekend / track submissions; use `award` when you placed, `hackathonName` when it was participation/build-only.
- *
- * Demo rows are marked “(demo placeholder)” — swap URLs and copy when you extend.
- */
-export const shippedProjectsContent = [
-  {
-    id: "imagine-nft",
-    title: "Imagine NFT — AI × Sui marketplace",
-    description:
-      "Decentralized NFT creation and marketplace on Sui: users describe ideas, AI generates copy and imagery, then mint, list, and sell in one flow.",
-    tags: ["React", "Sui", "OpenAI", "Tailwind CSS"],
-    githubUrl: "https://github.com/0xali3n/imgnft.fun",
-    liveUrl: "https://imgnft.fun",
-    screenshotSrc: "/screenshots/imagine-nft.svg",
-    award: null as string | null,
-  },
-  {
-    id: "adgenai",
-    title: "AdGenAI — creative ads from prompts",
-    description:
-      "AI-powered platform for high-quality advertisements and posters from user prompts and product imagery using Gemini, Imagen 3, and prompt engineering — real-time editing and brand alignment.",
-    tags: ["Next.js", "Gemini", "Imagen 3", "AWS S3"],
-    githubUrl: "https://github.com/0xali3n/AdGenAi",
-    liveUrl: "https://github.com/0xali3n/AdGenAi",
-    screenshotSrc: "/screenshots/adgenai.svg",
-    award: null as string | null,
-  },
-  {
-    id: "demo-internal-dashboard",
-    title: "Internal KPI dashboard (demo placeholder)",
-    description:
-      "Replace this card: e.g. role-based metrics, CSV export, and Slack alerts — a longer-lived product or internship build that was not a hackathon submission.",
-    tags: ["Next.js", "Demo", "Storybook"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
-    screenshotSrc: "/screenshots/suprascan.svg",
-    award: null as string | null,
-  },
-] as const;
-
-export const hackathonProjectsContent = [
-  {
-    id: "w3chat",
-    title: "W3Chat.io — AI Web3 assistant",
-    description:
-      "Natural-language and voice-driven assistant for blockchain actions: swaps, bridging, batch transfers, and automation across chains.",
-    tags: ["TypeScript", "Base", "Arbitrum", "Smart contracts"],
-    githubUrl: "https://github.com/0xali3n/w3chat.io",
-    liveUrl: "https://w3chat.io",
-    screenshotSrc: "/screenshots/w3chat.svg",
-    award: "ETHGlobal Agentic Ethereum — Round 2; Coinbase AgentKit pool",
-    hackathonName: "ETHGlobal Agentic Ethereum (2025)" as const,
-  },
-  {
-    id: "suprascan",
-    title: "SupraScan.fun — Supra network explorer",
-    description:
-      "Blockchain explorer for the Supra network: assets, liquidity pools, and transactions with developer-friendly APIs for real-time data.",
-    tags: ["Next.js", "Web3", "APIs"],
-    githubUrl: "https://github.com/0xali3n/SupraScan.fun",
-    liveUrl: "https://suprascan.fun",
-    screenshotSrc: "/screenshots/suprascan.svg",
-    award: "Supra Movers Hackathon — 3rd place ($2,000)",
-    hackathonName: "Supra Movers Hackathon" as const,
-  },
-  {
-    id: "demo-hack-participation",
-    title: "Account-abstraction relay (demo placeholder)",
-    description:
-      "Replace: a 48h build with no placement — use rows like this so participation still appears without inventing prizes.",
-    tags: ["Solidity", "Demo", "ERC-4337"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
-    screenshotSrc: "/screenshots/w3chat.svg",
-    award: null as string | null,
-    hackathonName: "DemoChain Hack — Spring 2025 (placeholder)" as const,
-  },
-  {
-    id: "demo-hack-honorable",
-    title: "Governance notify bot (demo placeholder)",
-    description:
-      "Replace: sponsor track or honorable mention — shows how to record a minor prize without crowding the hero cards.",
-    tags: ["Node.js", "Demo", "Governance"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
-    screenshotSrc: "/screenshots/imagine-nft.svg",
-    award: "Sponsor pick — best UX (demo)" as const,
-    hackathonName: "Uni Web3 Build (placeholder)" as const,
-  },
-] as const;
-
-/** Flat list if you need a single export (e.g. scripts). */
-export const projectsContent = [
-  ...shippedProjectsContent,
-  ...hackathonProjectsContent,
-] as const;
 
 /**
  * Competition ledger — `track` labels the focus column; `built` / `stack` power the detail modal.
@@ -390,13 +291,17 @@ export const achievementsContent = {
     {
       id: "sih-2023",
       ecosystem: "SIH · NTRO",
-      track: "NTRO · On-chain forensics",
+      track: "NTRO · Crypto forensics · De-anonymisation",
       event: "Smart India Hackathon 2023 — Grand Finale",
       when: "Dec 2023",
       built:
-        "For SIH 2023 grand finals I was on the NTRO problem — tracking abuse that touches crypto and the dark web. We built Python tooling to map flows and pack evidence so judges could follow the story.",
-      stack: "Python, graphs, chain data. Grand finalist.",
+        "We built a de-anonymisation product for monitoring and tracking illegal activity that uses cryptocurrency transactions — Python tooling to map flows and present evidence clearly for reviewers.",
+      stack: "Python, transaction tracing, graph analysis, on-chain data. Grand finalist.",
       prize: "Grand finalist" as string | null,
+      productLink: {
+        href: "/achivements/sih-2023-ntro-pitch-deck.pdf",
+        label: "Pitch deck (PDF)",
+      } as const,
       eventLink: {
         href: "https://www.sih.gov.in/sih2023s",
         label: "Hackathon · SIH 2023",
@@ -432,21 +337,6 @@ export const achievementsContent = {
   ] as const,
 } as const;
 
-export const perspectivesItems = [
-  {
-    title: "Beginner Hack Book — red teaming field notes",
-    excerpt:
-      "A GitBook compiling certifications, pentesting techniques, commands, and practical guides for Windows, Linux, exploitation, and web hacking — meant as a gentle entrance to red team work.",
-    href: "https://chinmay07.gitbook.io/ejpt",
-  },
-  {
-    title: "Hackathons: from DeFiChain quests to Supra explorers",
-    excerpt:
-      "Runner-up and side-track winner at DevHack 2023 (DeFiChain), Grand Finalist at SIH 2023 (crypto / dark-web traceability), first prize on the Diamante track at Hacker House Goa 2024 — the Achievements leaderboard summarizes results; projects below go deeper on builds.",
-    href: socialLinks.devfolio,
-  },
-] as const;
-
 export const skillsContent = {
   Languages: ["C", "C++", "Python", "JavaScript"],
   "Web & frameworks": [
@@ -467,6 +357,154 @@ export const skillsContent = {
     "eJPT (INE)",
   ],
   Foundations: ["Computer networks", "OOP", "DSA", "MongoDB"],
+} as const;
+
+export const localizedCopy = {
+  de: {
+    projects: {
+      cardLabels: {
+        github: "GitHub ↗",
+        liveDemo: "Live-Demo ↗",
+        devfolio: "Devfolio ↗",
+        deck: "Präsentation ↗",
+        report: "Bericht ↗",
+      },
+      projectTextById: {
+        adgenai: {
+          title: "KI-gestützter Anzeigen- und Poster-Generator",
+          description: "AdGenAI automatisiert die Erstellung von Kampagnenmotiven aus Prompt + Produktinput.",
+          highlights: [
+            "Pipeline für Prompt-zu-Poster aufgebaut, um Varianten in Minuten zu erstellen.",
+            "Gemini AI + Imagen 3 in einen gemeinsamen Generations-Loop integriert.",
+            "S3-basierte Asset-Ablage für Wiederverwendung und Review umgesetzt.",
+          ],
+        },
+        "imagine-nft": {
+          title: "Imagine NFT",
+          description: "KI-gestützte NFT-Erstellung und Listing-Pipeline auf Sui.",
+          highlights: [
+            "Text-Prompts in Bild + NFT-Metadaten in einem geführten Flow umgewandelt.",
+            "Generierung, Minting und Listing in derselben UX zusammengeführt.",
+            "Onboarding-Friction für Creator durch einfachen Sui-Flow reduziert.",
+          ],
+        },
+        "cryptoluck-casino": {
+          title: "CryptoLuck Casino",
+          description: "Privacy-first Casino-Prototyp auf Blockchain-Basis.",
+          highlights: [
+            "Provably-fair Spiellogik mit Wallet-basierten Auszahlungen umgesetzt.",
+            "Mines, Lucky Wheel und Prediction-Runden als Kern-Loops geliefert.",
+            "Schnelles, anonymes Onboarding für globale Nutzer priorisiert.",
+          ],
+        },
+        zory: {
+          title: "Zory - Web3 Social Platform auf VeryChain",
+          description: "Zory kombiniert Social Interactions mit On-Chain-Quest-Rewards auf VeryChain.",
+          highlights: [
+            "Feed, Quests und Token-Aktionen als zusammenhängenden Produkt-Flow gebaut.",
+            "Gasless-ähnliche Interaktionen für bessere First-time-User-Completion designt.",
+            "Reward-Accounting und Token-Pfade an verifizierte Contracts gebunden.",
+          ],
+        },
+        zerotrace: {
+          title: "ZeroTrace: End-to-End verschlüsseltes Messaging-DApp",
+          description: "Verschlüsseltes Messaging-MVP mit verifizierbarem State-Design.",
+          highlights: [
+            "Rust/Actix-Backend für privacy-first Messaging-State-Handling entworfen.",
+            "Psy-kompatible Proof/State-Transitions modelliert.",
+            "Simulierte ZK/Poseidon2-Module mit swap-fähigen Interfaces umgesetzt.",
+          ],
+        },
+        algocash: {
+          title: "AlgoCash - Digital Cash Management auf Algorand",
+          description: "AlgoCash ermöglicht verschlüsselte digitale Cash-Note Mint- und Claim-Flows.",
+          highlights: [
+            "Code-basierte Note-Ausgabe und Redemption auf Algorand gebaut.",
+            "Contract-Operationen und Management-Skripte für wiederholbare Flows umgesetzt.",
+            "Separate Public-Claim-Oberfläche für Endnutzer ausgeliefert.",
+          ],
+        },
+      },
+    },
+    experience: {
+      eyebrow: "Erfahrung",
+      title: "Werdegang",
+      closePreview: "Vorschau schließen",
+      entryTextById: {
+        "anthe-labs": {
+          summary: [
+            "Inkubiert von Xyra Labs: Anthe ist eine DeFi-Social-Trading-Infrastruktur auf Aptos.",
+          ],
+          bullets: [
+            "Mitgründer und Aufbau vom Hackathon-Prototyp zur registrierten Firma; Leitung eines 5-köpfigen Teams (Engineering, UI/UX, Marketing).",
+            "Kernarchitektur auf Aptos entworfen und ausgeliefert: Echtzeit-Copy-Trading, transparente Wallet-Ausführung, Live-Risikoanalysen.",
+            "Produktstrategie und Umsetzung Ende-zu-Ende geführt; Roadmap für Smart Grid/DCA-Bots und Creator-Monetarisierung gesteuert.",
+          ],
+        },
+        pravinya: {
+          subtitle: "Praktikum - Full Stack ML Developer · Hubballi, Karnataka, Indien",
+          bullets: [
+            "AdGenAI entwickelt: automatisierter Marketing-Asset-Generator mit React-Frontend, Flask-Backend und MongoDB.",
+            "Gemini- und Imagen-3-APIs integriert, um aus Produktbildern und Prompts markenkonforme Ads/Posters zu erzeugen.",
+            "Skalierbare Umsetzung mit AWS S3 und robuster API-Fehlerbehandlung im agilen Team geliefert.",
+          ],
+        },
+      },
+    },
+    achievements: {
+      eyebrow: "Wettbewerbe",
+      title: "Erfolge",
+      tableTrack: "Track · Fokus",
+      tablePlacement: "Platzierung & Preis",
+      tableWhen: "Zeit · Link",
+      labelPodiums: "Siege & Podiumsplätze",
+      labelEntered: "Hackathons teilgenommen",
+      labelPrizeMoney: "Gewinnsumme",
+      labelEcosystems: "Kern-Ökosysteme",
+      labelTenure: "Aktive Web3-Erfahrung",
+      closeDetails: "Erfolgsdetails schließen",
+      close: "Schließen",
+      architecture: "Architektur: ",
+      stack: "Technologie-Stack: ",
+      opensInNewTab: "(öffnet in neuem Tab)",
+      detailsPrefix: "Details",
+      detailTextById: {
+        "very-hackathon-2026": {
+          built: "Zory automatisiert SocialFi-Flows auf VeryChain mit Quests, Rewards und gaslosen Nutzeraktionen.",
+          stack: "React, Solidity, Wepin, Supabase, VeryChain.",
+        },
+        "build-on-aptos-meetup-2025": {
+          built: "Copiabel als Copy-Trading-Flow auf Aptos mit Decibel-Infrastruktur für reale Ausführung aufgebaut.",
+          stack: "Aptos Move, TypeScript, Decibel-Stack.",
+        },
+        "aptos-ctrlmove-2025": {
+          built: "Social Trade für Kana-Perps-Bounty mit Follow-Logik und Risiko-Grenzen ausgeliefert.",
+          stack: "Aptos, Kana-Perps-Integration, Web-App.",
+        },
+        "ethglobal-agentic": {
+          built: "W3Chat als Agent-UI für Senden, Swaps, Bridges und Automationen umgesetzt.",
+          stack: "Next.js, AgentKit, OnchainKit, Hyperlane.",
+        },
+        "supra-movers": {
+          built: "SupraScan als Explorer + API-Flow für Assets, Transaktionen und Pools geliefert.",
+          stack: "React, Next.js, Supra RPC/Indexer.",
+        },
+        "hh-goa-2024": {
+          built: "CryptoLuck als privacy-first Casino-Prototyp mit provably-fair Spielpfaden gebaut.",
+          stack: "React, Node.js, Diamante, Garden SDK.",
+        },
+        "sih-2023": {
+          built:
+            "De-Anonymisierung zur Überwachung und Nachverfolgung illegaler Aktivitäten über Krypto-Transaktionen umgesetzt — Python-Tooling für Fluss-Mapping und klare Beweisdarstellung.",
+          stack: "Python, Transaktions-Tracing, Graph-Analysen, On-chain-Daten. Grand-Finalist.",
+        },
+        "devhack-2023": {
+          built: "DeFiChain.in mit Lernquests, XP-zu-Token-Flow und Governance-Pfaden umgesetzt.",
+          stack: "React, ethers.js, TypeScript, DeFiChain.",
+        },
+      },
+    },
+  },
 } as const;
 
 export const spokenLanguages = [

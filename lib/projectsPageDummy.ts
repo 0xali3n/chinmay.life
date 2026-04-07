@@ -26,8 +26,8 @@ export const showcaseProjectsDummy = [
     imageSrc:
       "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=AdGenAI+dashboard",
     githubUrl: undefined,
-    reportUrl: "/projects/AdGenAi Report.pdf",
-    deckUrl: "/projects/AdGenAi_deck.pptx",
+    reportUrl: "/projects/adgenai-industry-report.pdf",
+    deckUrl: "/internship/adgenai-pitch-deck.pdf",
   },
   {
     id: "imagine-nft",

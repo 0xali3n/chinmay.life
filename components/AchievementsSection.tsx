@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
-import { achievementsContent } from "@/lib/content";
+import { achievementsContent, localizedCopy } from "@/lib/content";
 import { FadeIn } from "./FadeIn";
 
 type AchievementListItem = (typeof achievementsContent.items)[number];
@@ -86,22 +86,41 @@ function PrizeHighlight({ text }: { text: string | null }) {
   );
 }
 
-function AchievementBulletList({ built, stack }: { built: string; stack: string }) {
+function AchievementBulletList({
+  built,
+  stack,
+  lang,
+  deLabels,
+}: {
+  built: string;
+  stack: string;
+  lang: "en" | "de";
+  deLabels: (typeof localizedCopy)["de"]["achievements"];
+}) {
   return (
     <ul className="space-y-2 text-left text-sm leading-relaxed text-slate-700">
       <li className="relative pl-4 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-blue-600">
-        <span className="font-medium text-slate-800">Architecture: </span>
+        <span className="font-medium text-slate-800">{lang === "de" ? deLabels.architecture : "Architecture: "}</span>
         {built}
       </li>
       <li className="relative pl-4 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-slate-400">
-        <span className="font-medium text-slate-800">Stack: </span>
+        <span className="font-medium text-slate-800">{lang === "de" ? deLabels.stack : "Stack: "}</span>
         {stack}
       </li>
     </ul>
   );
 }
 
-function AchievementDetailModal({ item, onClose }: { item: AchievementListItem; onClose: () => void }) {
+function AchievementDetailModal({
+  item,
+  onClose,
+  lang,
+}: {
+  item: AchievementListItem;
+  onClose: () => void;
+  lang: "en" | "de";
+}) {
+  const de = localizedCopy.de.achievements;
   const product = getProductLink(item);
   const event = getEventLink(item);
   const result = getResultLink(item);
@@ -134,7 +153,7 @@ function AchievementDetailModal({ item, onClose }: { item: AchievementListItem; 
     >
       <button
         type="button"
-        aria-label="Close achievement details"
+        aria-label={lang === "de" ? de.closeDetails : "Close achievement details"}
         className="absolute inset-0 bg-slate-900/55 backdrop-blur-sm"
         onClick={onClose}
       />
@@ -159,7 +178,7 @@ function AchievementDetailModal({ item, onClose }: { item: AchievementListItem; 
             type="button"
             onClick={onClose}
             className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-colors hover:bg-slate-100"
-            aria-label="Close"
+            aria-label={lang === "de" ? de.close : "Close"}
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -167,7 +186,20 @@ function AchievementDetailModal({ item, onClose }: { item: AchievementListItem; 
           </button>
         </div>
         <div className="max-h-[min(70vh,520px)] overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
-          <AchievementBulletList built={item.built} stack={item.stack} />
+          <AchievementBulletList
+            built={
+              lang === "de"
+                ? de.detailTextById[item.id as keyof typeof de.detailTextById]?.built ?? item.built
+                : item.built
+            }
+            stack={
+              lang === "de"
+                ? de.detailTextById[item.id as keyof typeof de.detailTextById]?.stack ?? item.stack
+                : item.stack
+            }
+            lang={lang}
+            deLabels={de}
+          />
           {(event || product || result) && (
             <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
               {event ? (
@@ -213,8 +245,9 @@ function AchievementDetailModal({ item, onClose }: { item: AchievementListItem; 
 }
 
 /** Metric strip + data-dense competition leaderboard (no media). */
-export function AchievementsSection() {
+export function AchievementsSection({ lang = "en" }: { lang?: "en" | "de" }) {
   const { eyebrow, title, stats, items } = achievementsContent;
+  const de = localizedCopy.de.achievements;
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const selectedItem = useMemo(
@@ -235,9 +268,11 @@ export function AchievementsSection() {
     >
       <div className="mx-auto max-w-5xl px-5 sm:px-6 md:px-8">
         <FadeIn className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-600">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-600">
+            {lang === "de" ? de.eyebrow : eyebrow}
+          </p>
           <h2 className="mt-2 font-sans text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl md:text-3xl">
-            {title}
+            {lang === "de" ? de.title : title}
           </h2>
         </FadeIn>
 
@@ -258,7 +293,7 @@ export function AchievementsSection() {
                       {stat.value}
                     </p>
                     <p className="mt-2 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-500 sm:text-[11px]">
-                      {stat.label}
+                      {lang === "de" && stat.id === "podiums" ? de.labelPodiums : stat.label}
                     </p>
                   </div>
                   <div className="w-px shrink-0 bg-slate-200/90" aria-hidden />
@@ -267,7 +302,7 @@ export function AchievementsSection() {
                       {stat.pairValue}
                     </p>
                     <p className="mt-2 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-500 sm:text-[11px]">
-                      {stat.pairLabel}
+                      {lang === "de" ? de.labelEntered : stat.pairLabel}
                     </p>
                   </div>
                 </div>
@@ -277,7 +312,13 @@ export function AchievementsSection() {
                     {stat.value}
                   </p>
                   <p className="mt-2 text-[10px] font-semibold uppercase leading-snug tracking-wide text-slate-500 sm:text-[11px]">
-                    {stat.label}
+                    {lang === "de" && stat.id === "prize-money"
+                      ? de.labelPrizeMoney
+                      : lang === "de" && stat.id === "ecosystems"
+                        ? de.labelEcosystems
+                        : lang === "de" && stat.id === "tenure"
+                          ? de.labelTenure
+                          : stat.label}
                   </p>
                 </>
               )}
@@ -287,10 +328,10 @@ export function AchievementsSection() {
 
         <div className="mt-10 overflow-hidden rounded-xl border border-slate-200/90 bg-white shadow-sm">
           <div className="hidden border-b border-slate-200 bg-slate-50/80 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500 md:grid md:grid-cols-12 md:items-center md:gap-x-6 md:px-5">
-            <div className="col-span-4">Event</div>
-            <div className="col-span-3">Track · focus</div>
-            <div className="col-span-3 text-right">Placement &amp; prize</div>
-            <div className="col-span-2 text-right">When · link</div>
+            <div className="col-span-4">{lang === "de" ? "Event" : "Event"}</div>
+            <div className="col-span-3">{lang === "de" ? de.tableTrack : "Track · focus"}</div>
+            <div className="col-span-3 text-right">{lang === "de" ? de.tablePlacement : "Placement & prize"}</div>
+            <div className="col-span-2 text-right">{lang === "de" ? de.tableWhen : "When · link"}</div>
           </div>
           {items.map((item, i) => {
             const primary = achievementPrimaryLink(item);
@@ -303,7 +344,7 @@ export function AchievementsSection() {
                 transition={{ duration: 0.3, delay: i * 0.02 }}
                 role="button"
                 tabIndex={0}
-                aria-label={`Details: ${item.event}`}
+                aria-label={`${lang === "de" ? de.detailsPrefix : "Details"}: ${item.event}`}
                 className="grid cursor-pointer grid-cols-1 gap-2 border-b border-gray-200 px-4 py-3.5 transition-colors last:border-b-0 hover:bg-slate-50/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 md:grid-cols-12 md:items-center md:gap-x-6 md:px-5"
                 onClick={() => openAch(item)}
                 onKeyDown={(e) => {
@@ -331,7 +372,7 @@ export function AchievementsSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       title={primary.label}
-                      aria-label={`${primary.label} (opens in new tab)`}
+                      aria-label={`${primary.label} ${lang === "de" ? de.opensInNewTab : "(opens in new tab)"}`}
                       className="shrink-0 text-base text-slate-400 transition-colors hover:text-blue-600"
                       onClick={(e) => e.stopPropagation()}
                       onKeyDown={(e) => e.stopPropagation()}
@@ -349,7 +390,7 @@ export function AchievementsSection() {
           })}
         </div>
       </div>
-      {selectedItem ? <AchievementDetailModal item={selectedItem} onClose={closeAch} /> : null}
+      {selectedItem ? <AchievementDetailModal item={selectedItem} onClose={closeAch} lang={lang} /> : null}
     </section>
   );
 }

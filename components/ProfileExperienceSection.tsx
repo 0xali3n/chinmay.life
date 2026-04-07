@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { experienceItems } from "@/lib/content";
+import { experienceItems, localizedCopy } from "@/lib/content";
 import { FadeIn } from "./FadeIn";
 
 type ArtifactState = {
@@ -116,17 +116,19 @@ function DocumentKindIcon({ kind, className }: { kind: "image" | "pdf"; classNam
   );
 }
 
-function externalLinkButtonLabel(kind: "website" | "x" | "linktree") {
+function externalLinkButtonLabel(kind: "website" | "x" | "linktree", lang: "en" | "de") {
   if (kind === "website") return "Website";
-  if (kind === "x") return "X (Twitter)";
+  if (kind === "x") return lang === "de" ? "X (Twitter)" : "X (Twitter)";
   return "Linktree";
 }
 
 /** Horizontal pill buttons with icon + label (e.g. Anthe). */
 function ExperienceIconLinkRow({
   links,
+  lang,
 }: {
   links: readonly { kind: "website" | "x" | "linktree"; href: string; label: string }[];
+  lang: "en" | "de";
 }) {
   return (
     <div className="mt-5 flex flex-wrap items-center gap-2">
@@ -144,7 +146,7 @@ function ExperienceIconLinkRow({
         >
           <ExperienceIcon kind={link.kind} className="h-3.5 w-3.5 shrink-0" />
           <span className="text-xs font-semibold tracking-tight">
-            {externalLinkButtonLabel(link.kind)}
+            {externalLinkButtonLabel(link.kind, lang)}
           </span>
         </motion.a>
       ))}
@@ -164,28 +166,48 @@ function InternshipArtifactButtons({
   }[];
   onOpen: (a: ArtifactState) => void;
 }) {
+  const pillClass =
+    "inline-flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 sm:px-3.5 text-slate-600 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700";
+
   return (
     <div className="mt-5 flex flex-wrap items-center gap-2">
-      {documents.map((doc) => (
-        <motion.button
-          key={doc.href}
-          type="button"
-          onClick={() =>
-            onOpen({
-              src: doc.href,
-              title: doc.label,
-              mediaKind: doc.mediaKind,
-              downloadFilename: doc.downloadFilename,
-            })
-          }
-          className="inline-flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 sm:px-3.5 text-slate-600 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <DocumentKindIcon kind={doc.mediaKind} className="h-3.5 w-3.5 shrink-0" />
-          <span className="text-xs font-semibold tracking-tight">{doc.label}</span>
-        </motion.button>
-      ))}
+      {documents.map((doc) =>
+        doc.mediaKind === "pdf" ? (
+          <motion.a
+            key={doc.href}
+            href={encodeURI(doc.href)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={pillClass}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            title={doc.label}
+            aria-label={`${doc.label} (opens in new tab)`}
+          >
+            <DocumentKindIcon kind="pdf" className="h-3.5 w-3.5 shrink-0" />
+            <span className="text-xs font-semibold tracking-tight">{doc.label}</span>
+          </motion.a>
+        ) : (
+          <motion.button
+            key={doc.href}
+            type="button"
+            onClick={() =>
+              onOpen({
+                src: doc.href,
+                title: doc.label,
+                mediaKind: doc.mediaKind,
+                downloadFilename: doc.downloadFilename,
+              })
+            }
+            className={pillClass}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <DocumentKindIcon kind="image" className="h-3.5 w-3.5 shrink-0" />
+            <span className="text-xs font-semibold tracking-tight">{doc.label}</span>
+          </motion.button>
+        ),
+      )}
     </div>
   );
 }
@@ -193,9 +215,11 @@ function InternshipArtifactButtons({
 function ArtifactPreviewModal({
   artifact,
   onClose,
+  lang,
 }: {
   artifact: ArtifactState;
   onClose: () => void;
+  lang: "en" | "de";
 }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -222,7 +246,7 @@ function ArtifactPreviewModal({
     >
       <button
         type="button"
-        aria-label="Close preview"
+        aria-label={lang === "de" ? "Vorschau schließen" : "Close preview"}
         className="absolute inset-0 bg-slate-900/55 backdrop-blur-sm"
         onClick={onClose}
       />
@@ -242,13 +266,13 @@ function ArtifactPreviewModal({
               download={artifact.downloadFilename}
               className="inline-flex items-center justify-center rounded-full bg-blue-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm shadow-blue-600/25 transition-colors hover:bg-blue-700"
             >
-              Download
+              {lang === "de" ? "Download" : "Download"}
             </a>
             <button
               type="button"
               onClick={onClose}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-colors hover:bg-slate-100"
-              aria-label="Close"
+              aria-label={lang === "de" ? "Schließen" : "Close"}
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -280,8 +304,25 @@ function ArtifactPreviewModal({
 }
 
 /** Full-width experience timeline. */
-export function ProfileExperienceSection() {
+export function ProfileExperienceSection({ lang = "en" }: { lang?: "en" | "de" }) {
   const [artifact, setArtifact] = useState<ArtifactState | null>(null);
+  const de = localizedCopy.de.experience;
+  const deEntries = de.entryTextById as Record<
+    string,
+    { subtitle?: string; summary?: readonly string[]; bullets?: readonly string[] }
+  >;
+  const t =
+    lang === "de"
+      ? {
+          eyebrow: de.eyebrow,
+          title: de.title,
+          closePreview: de.closePreview,
+        }
+      : {
+          eyebrow: "Experience",
+          title: "Track record",
+          closePreview: "Close preview",
+        };
 
   return (
     <section className="scroll-mt-28 md:scroll-mt-32 bg-slate-50 border-t border-slate-100 py-14 md:py-16">
@@ -289,15 +330,17 @@ export function ProfileExperienceSection() {
         <div id="experience" className="scroll-mt-28 md:scroll-mt-32 min-w-0">
           <FadeIn>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-600 mb-2">
-              Experience
+              {t.eyebrow}
             </p>
             <h2 className="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 leading-snug">
-              Track record
+              {t.title}
             </h2>
           </FadeIn>
 
           <ul className="mt-6 space-y-5 max-w-3xl">
-            {experienceItems.map((item, index) => (
+            {experienceItems.map((item, index) => {
+              const deEntry = deEntries[item.id];
+              return (
               <motion.li
                 key={item.id}
                 initial={{ opacity: 0, y: 8 }}
@@ -320,13 +363,18 @@ export function ProfileExperienceSection() {
                     <p className="text-xs text-slate-500">{item.period}</p>
                     <p className="mt-0.5 font-semibold text-slate-900">{item.company}</p>
                     <p className="text-xs text-slate-600 mt-0.5">
-                      {"subtitleLine" in item && item.subtitleLine
-                        ? item.subtitleLine
-                        : `${item.role} · ${item.location}`}
+                      {lang === "de" && deEntry?.subtitle
+                        ? deEntry.subtitle
+                        : "subtitleLine" in item && item.subtitleLine
+                          ? item.subtitleLine
+                          : `${item.role} · ${item.location}`}
                     </p>
                     {"summaryParagraphs" in item && item.summaryParagraphs.length > 0 ? (
                       <div className="mt-3 space-y-3">
-                        {item.summaryParagraphs.map((paragraph, i) => (
+                        {(lang === "de" && deEntry?.summary
+                          ? deEntry.summary
+                          : item.summaryParagraphs
+                        ).map((paragraph: string, i: number) => (
                           <p
                             key={i}
                             className="text-sm text-slate-600 leading-relaxed text-pretty"
@@ -339,7 +387,10 @@ export function ProfileExperienceSection() {
                     <ul
                       className={`space-y-2.5 ${"summaryParagraphs" in item && item.summaryParagraphs.length > 0 ? "mt-4" : "mt-3"}`}
                     >
-                      {item.bullets.map((b, idx) => (
+                      {(lang === "de" && deEntry?.bullets
+                        ? deEntry.bullets
+                        : item.bullets
+                      ).map((b, idx) => (
                         <li
                           key={idx}
                           className="relative pl-5 text-sm text-slate-600 leading-relaxed text-pretty before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-blue-600"
@@ -355,16 +406,17 @@ export function ProfileExperienceSection() {
                       />
                     ) : null}
                     {"externalIconLinks" in item && item.externalIconLinks.length > 0 ? (
-                      <ExperienceIconLinkRow links={item.externalIconLinks} />
+                      <ExperienceIconLinkRow links={item.externalIconLinks} lang={lang} />
                     ) : null}
                   </div>
                 </div>
               </motion.li>
-            ))}
+              );
+            })}
           </ul>
         </div>
       </div>
-      {artifact ? <ArtifactPreviewModal artifact={artifact} onClose={() => setArtifact(null)} /> : null}
+      {artifact ? <ArtifactPreviewModal artifact={artifact} onClose={() => setArtifact(null)} lang={lang} /> : null}
     </section>
   );
 }

@@ -3,19 +3,33 @@ import { FadeIn } from "./FadeIn";
 
 const categories = Object.keys(skillsContent) as (keyof typeof skillsContent)[];
 
-export function SkillsSection() {
+export function SkillsSection({ lang = "en" }: { lang?: "en" | "de" }) {
+  const t =
+    lang === "de"
+      ? {
+          eyebrow: "Kompetenzen",
+          title: "Skills & Werkzeuge",
+          description:
+            "Für Bewerbungen schnell scanbar gruppiert; Details und Zeiträume stehen im Lebenslauf (PDF).",
+        }
+      : {
+          eyebrow: "Capabilities",
+          title: "Skills & tools",
+          description: "Grouped for quick scanning on applications; details and dates are on the CV (PDF).",
+        };
+
   return (
     <section className="py-12 md:py-14 border-t border-slate-100 bg-white">
       <div className="mx-auto max-w-5xl px-5 sm:px-6 md:px-8">
         <FadeIn className="mb-5">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue-600 mb-1">
-            Capabilities
+            {t.eyebrow}
           </p>
           <h2 className="font-sans text-lg md:text-xl font-semibold tracking-tight text-slate-900">
-            Skills & tools
+            {t.title}
           </h2>
           <p className="mt-2 text-sm text-slate-600 leading-relaxed max-w-2xl">
-            Grouped for quick scanning on applications; details and dates are on the CV (PDF).
+            {t.description}
           </p>
         </FadeIn>
 

@@ -2,7 +2,20 @@ import { showcaseProjectsDummy } from "@/lib/projectsPageDummy";
 import { SectionHeading } from "./SectionHeading";
 import { ShowcaseProjectCard } from "./ShowcaseProjectCard";
 
-export function ProjectsSection() {
+export function ProjectsSection({ lang = "en" }: { lang?: "en" | "de" }) {
+  const t =
+    lang === "de"
+      ? {
+          eyebrow: "Projekte",
+          title: "Engineering-Arbeit",
+          description:
+            "Eine klare Übersicht von Produkten und Prototypen mit Fokus auf Architektur, Umsetzung und Code.",
+        }
+      : {
+          eyebrow: "Projects",
+          title: "Engineering work",
+          description: "One clean grid of products and prototypes with code-first context.",
+        };
   return (
     <section
       id="projects"
@@ -10,14 +23,14 @@ export function ProjectsSection() {
     >
       <div className="mx-auto max-w-5xl px-5 sm:px-6 md:px-8">
         <SectionHeading
-          eyebrow="Projects"
-          title="Engineering work"
-          description="One clean grid of products and prototypes with code-first context."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
           {showcaseProjectsDummy.map((project) => (
-            <ShowcaseProjectCard key={project.id} project={project} />
+            <ShowcaseProjectCard key={project.id} project={project} lang={lang} />
           ))}
         </div>
       </div>

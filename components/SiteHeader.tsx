@@ -42,11 +42,22 @@ function useActiveSectionHref() {
   return activeHref;
 }
 
-export function SiteHeader() {
+export function SiteHeader({ lang = "en" }: { lang?: "en" | "de" }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const activeHref = useActiveSectionHref();
   const { head, tail } = splitBrand(siteMeta.brand);
+  const deLabels: Record<string, string> = {
+    Experience: "Erfahrung",
+    Achievements: "Erfolge",
+    Projects: "Projekte",
+    Contact: "Kontakt",
+  };
+  const withLang = (href: string, targetLang: "en" | "de") => {
+    const prefix = targetLang === "de" ? "?lang=de" : "";
+    if (href.startsWith("#")) return `${prefix}${href}`;
+    return `${href}${prefix}`;
+  };
 
   return (
     <header className="fixed top-4 md:top-5 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-4 pointer-events-none">
@@ -81,26 +92,44 @@ export function SiteHeader() {
             }`;
             if (isRoute) {
               return (
-                <Link key={link.href} href={link.href} className={className}>
-                  {link.label}
+                <Link key={link.href} href={withLang(link.href, lang)} className={className}>
+                  {lang === "de" ? (deLabels[link.label] ?? link.label) : link.label}
                 </Link>
               );
             }
             return (
               <motion.a
                 key={link.href}
-                href={link.href}
+                href={withLang(link.href, lang)}
                 className={className}
                 whileHover={{ y: -0.5 }}
                 transition={{ type: "spring", stiffness: 450, damping: 28 }}
               >
-                {link.label}
+                {lang === "de" ? (deLabels[link.label] ?? link.label) : link.label}
               </motion.a>
             );
           })}
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-1.5">
+          <div className="hidden min-[820px]:inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5">
+            <Link
+              href="/"
+              className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${
+                lang === "en" ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"
+              }`}
+            >
+              EN
+            </Link>
+            <Link
+              href="/?lang=de"
+              className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${
+                lang === "de" ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"
+              }`}
+            >
+              DE
+            </Link>
+          </div>
           <motion.a
             href="/cv.pdf"
             target="_blank"
@@ -109,17 +138,17 @@ export function SiteHeader() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Resume
+            {lang === "de" ? "Lebenslauf" : "Resume"}
           </motion.a>
 
           <button
             type="button"
             className="min-[820px]:hidden relative flex h-9 w-9 items-center justify-center rounded-full text-slate-700 hover:bg-slate-100"
             aria-expanded={open}
-            aria-label="Menu"
+            aria-label={lang === "de" ? "Menü" : "Menu"}
             onClick={() => setOpen((v) => !v)}
           >
-            <span className="sr-only">Menu</span>
+            <span className="sr-only">{lang === "de" ? "Menü" : "Menu"}</span>
             <span
               className={`absolute left-1/2 top-[13px] h-0.5 w-4 -translate-x-1/2 rounded-full bg-current transition-all duration-200 ${open ? "top-1/2 translate-y-0 rotate-45" : ""}`}
             />
@@ -146,16 +175,36 @@ export function SiteHeader() {
               return (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={withLang(link.href, lang)}
                   className={`rounded-xl px-4 py-3 text-sm font-medium ${
                     isActive ? "bg-blue-600 text-white" : "text-slate-700 hover:bg-blue-50 hover:text-blue-700"
                   }`}
                   onClick={() => setOpen(false)}
                 >
-                  {link.label}
+                  {lang === "de" ? (deLabels[link.label] ?? link.label) : link.label}
                 </Link>
               );
             })}
+            <div className="mt-1 flex items-center gap-2 px-2">
+              <Link
+                href="/"
+                className={`rounded-lg px-3 py-2 text-xs font-semibold ${
+                  lang === "en" ? "bg-slate-900 text-white" : "text-slate-700 hover:bg-slate-100"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                English
+              </Link>
+              <Link
+                href="/?lang=de"
+                className={`rounded-lg px-3 py-2 text-xs font-semibold ${
+                  lang === "de" ? "bg-slate-900 text-white" : "text-slate-700 hover:bg-slate-100"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                Deutsch
+              </Link>
+            </div>
           </div>
         </motion.nav>
       ) : null}

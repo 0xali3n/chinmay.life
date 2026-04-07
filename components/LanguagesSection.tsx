@@ -1,19 +1,33 @@
 import { spokenLanguages } from "@/lib/content";
 import { FadeIn } from "./FadeIn";
 
-export function LanguagesSection() {
+export function LanguagesSection({ lang = "en" }: { lang?: "en" | "de" }) {
+  const t =
+    lang === "de"
+      ? {
+          eyebrow: "Kommunikation",
+          title: "Sprachen",
+          description:
+            "Sprachprofil für Bewerbungen an deutschen Universitäten, Praktika und wissenschaftliche Zusammenarbeit.",
+        }
+      : {
+          eyebrow: "Communication",
+          title: "Languages",
+          description:
+            "Working language profile for German university applications, internships, and research collaboration.",
+        };
   return (
     <section className="border-t border-slate-100 bg-slate-50/50 py-12 md:py-14">
       <div className="mx-auto max-w-5xl px-5 sm:px-6 md:px-8">
         <FadeIn className="mb-5">
           <p className="mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-blue-600">
-            Communication
+            {t.eyebrow}
           </p>
           <h2 className="font-sans text-lg font-semibold tracking-tight text-slate-900 md:text-xl">
-            Languages
+            {t.title}
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
-            Working language profile for German university applications, internships, and research collaboration.
+            {t.description}
           </p>
         </FadeIn>
 
