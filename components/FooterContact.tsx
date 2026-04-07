@@ -19,8 +19,9 @@ export function FooterContact() {
               Let&apos;s <span className="text-blue-600">connect</span>
             </h2>
             <p className="mt-3 max-w-md text-sm text-slate-600 leading-relaxed">
-              {siteMeta.location}. Open to German university admissions conversations, research collaboration,
-              and software engineering internships/jobs.
+              {siteMeta.location}. Open to German university admissions
+              conversations, research collaboration, and software engineering
+              internships/jobs.
             </p>
             <motion.a
               href={`mailto:${siteMeta.email}`}

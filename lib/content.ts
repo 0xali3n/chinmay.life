@@ -29,7 +29,6 @@ export const socialLinks = {
 } as const;
 
 export const footerSocialLinks = [
-  { label: "Website", href: socialLinks.website },
   { label: "LinkedIn", href: socialLinks.linkedin },
   { label: "GitHub", href: socialLinks.github },
   { label: "X (Twitter)", href: socialLinks.twitter },
@@ -292,8 +291,7 @@ export const achievementsContent = {
       when: "Dec 2025",
       built:
         "For Rise In's Build on Aptos I worked on Copiabel — copy trading on Move where the real execution goes through Decibel Trade's infra. We came second runner-up and won $1,500.",
-      stack:
-        "Move, TypeScript, Decibel stack. Rise In hackathon.",
+      stack: "Move, TypeScript, Decibel stack. Rise In hackathon.",
       prize: "2nd runner-up · $1,500" as string | null,
       eventLink: {
         href: "https://www.risein.com/programs/build-on-aptos-hackathon",
@@ -312,8 +310,7 @@ export const achievementsContent = {
       when: "Oct 2025",
       built:
         "At CTRL+MOVE I shipped Social Trade on Aptos — you follow someone's perp trades instead of placing everything by hand. Got the $2,500 Kana Labs bounty.",
-      stack:
-        "Aptos, Kana perps, small web app — live links on the Dora buidl.",
+      stack: "Aptos, Kana perps, small web app — live links on the Dora buidl.",
       prize: "Bounty · $2,500" as string | null,
       productLink: {
         href: "https://dorahacks.io/buidl/34158",
@@ -352,8 +349,7 @@ export const achievementsContent = {
       when: "Jan 2025",
       built:
         "At Supra Movers I built SupraScan — a simple explorer for Supra plus an API keys flow so people can query balances, txs, and pools. Placed third and $2,000; Supra shared it on X afterward.",
-      stack:
-        "React, Next, Supra RPC, stuff we indexed ourselves. Third place.",
+      stack: "React, Next, Supra RPC, stuff we indexed ourselves. Third place.",
       prize: "3rd · $2,000" as string | null,
       productLink: {
         href: "https://devfolio.co/projects/suprascanfun-d236",
@@ -376,8 +372,7 @@ export const achievementsContent = {
       when: "Aug 2024",
       built:
         "At Hacker House Goa our team shipped CryptoLuck — a small on-chain casino style demo on Diamante with a few games and Garden handling deposits and withdrawals. We won first on the Diamante track with $3,000.",
-      stack:
-        "React, Node, Diamante wallet, Garden SDK. Built with CryptoD5.",
+      stack: "React, Node, Diamante wallet, Garden SDK. Built with CryptoD5.",
       prize: "1st — Diamante ($3k)" as string | null,
       productLink: {
         href: "https://devfolio.co/projects/cryptoluck-casino-bet-win-and-play-anonymously-5353",
@@ -400,8 +395,7 @@ export const achievementsContent = {
       when: "Dec 2023",
       built:
         "For SIH 2023 grand finals I was on the NTRO problem — tracking abuse that touches crypto and the dark web. We built Python tooling to map flows and pack evidence so judges could follow the story.",
-      stack:
-        "Python, graphs, chain data. Grand finalist.",
+      stack: "Python, graphs, chain data. Grand finalist.",
       prize: "Grand finalist" as string | null,
       eventLink: {
         href: "https://www.sih.gov.in/sih2023s",
@@ -420,8 +414,7 @@ export const achievementsContent = {
       when: "Nov–Dec 2023",
       built:
         "At DevHack 2023 we launched DeFiChain.in — you do quests on chain, earn XP, turn it into DFI, stake, and vote. Runner-up overall plus another win on a side track.",
-      stack:
-        "React, ethers, DeFiChain MetaChain. Built with CryptoD5.",
+      stack: "React, ethers, DeFiChain MetaChain. Built with CryptoD5.",
       prize: "Runner-up ($1,500) · Side track ($1,200)" as string | null,
       productLink: {
         href: "https://devfolio.co/projects/defichainin-learn-empower-and-earn-dollardfi-2ca8",
@@ -487,7 +480,7 @@ export const spokenLanguages = [
   },
   {
     language: "Kannada",
-    level: "Native / Professional working proficiency",
+    level: "Professional working proficiency",
   },
   {
     language: "Hindi",
