@@ -368,6 +368,8 @@ export const localizedCopy = {
         devfolio: "Devfolio ↗",
         deck: "Präsentation ↗",
         report: "Bericht ↗",
+        linkedin: "LinkedIn ↗",
+        video: "Video ↗",
       },
       projectTextById: {
         adgenai: {
@@ -415,13 +417,14 @@ export const localizedCopy = {
             "Simulierte ZK/Poseidon2-Module mit swap-fähigen Interfaces umgesetzt.",
           ],
         },
-        algocash: {
-          title: "AlgoCash - Digital Cash Management auf Algorand",
-          description: "AlgoCash ermöglicht verschlüsselte digitale Cash-Note Mint- und Claim-Flows.",
+        "gyro-maze-board": {
+          title: "Handgesteuertes Labyrinth — Gyroskop & Arduino",
+          description:
+            "Embedded-Projekt: Gyroskop und Arduino steuern eine Zwei-Achsen-Servo-Mechanik — Neigung wird in präzise Echtzeit-Bewegung in X/Y übersetzt.",
           highlights: [
-            "Code-basierte Note-Ausgabe und Redemption auf Algorand gebaut.",
-            "Contract-Operationen und Management-Skripte für wiederholbare Flows umgesetzt.",
-            "Separate Public-Claim-Oberfläche für Endnutzer ausgeliefert.",
+            "Gyroskop-Eingaben per Arduino-Firmware für reaktionsschnelle Handführung.",
+            "Orthogonale Servo-Anordnung für unabhängige X- und Y-Positionierung der Plattform.",
+            "Präsentation bei Prayog Varsh 2022 (KLE Tech) im Rahmen der Engineering-Exploration.",
           ],
         },
       },

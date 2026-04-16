@@ -9,6 +9,8 @@ export type ShowcaseProject = {
   liveUrl?: string;
   reportUrl?: string;
   deckUrl?: string;
+  linkedinUrl?: string;
+  videoUrl?: string;
 };
 
 export const showcaseProjectsDummy = [
@@ -91,18 +93,20 @@ export const showcaseProjectsDummy = [
     githubUrl: "https://github.com/0xali3n/psy",
   },
   {
-    id: "algocash",
-    title: "AlgoCash - Digital Cash Management System on Algorand",
+    id: "gyro-maze-board",
+    title: "Hand-controlled maze — gyroscope & Arduino",
     description:
-      "AlgoCash enables encrypted digital cash-note mint and claim flows.",
+      "Embedded systems project: a gyroscope and Arduino drive a dual-axis servo rig so tilt maps to precise real-time X/Y motion through a maze.",
     highlights: [
-      "Built encrypted code-based note issuance and redemption on Algorand.",
-      "Implemented contract operations and management scripts for repeatable flows.",
-      "Delivered a separate public claim interface to simplify end-user redemption.",
+      "Gyroscope input fused with Arduino firmware for responsive hand-guided control.",
+      "Orthogonal servo mounts for independent X and Y positioning of the maze platform.",
+      "Presented at Prayog Varsh 2022 (KLE Technological University) as part of the first-year engineering exploration programme.",
     ],
-    stack: ["Algorand", "TypeScript", "React", "TEAL", "Node.js", "Vite"],
+    stack: ["Arduino", "Gyroscope", "Servo motors", "Embedded C/C++"],
     imageSrc:
-      "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=AlgoCash",
-    githubUrl: "https://github.com/0xali3n/Algocash",
+      "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=Gyro+maze",
+    linkedinUrl:
+      "https://www.linkedin.com/pulse/prayog-varsh-2022-kle-tech-chinmay-patil/",
+    videoUrl: "https://vimeo.com/744090776",
   },
 ] as const satisfies readonly ShowcaseProject[];

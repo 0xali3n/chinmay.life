@@ -33,6 +33,12 @@ export function ShowcaseProjectCard({
       : []),
     ...(project.deckUrl ? [{ label: lang === "de" ? de.cardLabels.deck : "Deck ↗", href: project.deckUrl }] : []),
     ...(project.reportUrl ? [{ label: lang === "de" ? de.cardLabels.report : "Report ↗", href: project.reportUrl }] : []),
+    ...(project.linkedinUrl
+      ? [{ label: lang === "de" ? de.cardLabels.linkedin : "LinkedIn ↗", href: project.linkedinUrl }]
+      : []),
+    ...(project.videoUrl
+      ? [{ label: lang === "de" ? de.cardLabels.video : "Video ↗", href: project.videoUrl }]
+      : []),
   ];
 
   const opensNewTabHint = lang === "de" ? "(öffnet in neuem Tab)" : "(opens in new tab)";

@@ -239,10 +239,10 @@ def main():
             ],
         ),
         (
-            "AlgoCash — Digital Cash Management on Algorand",
+            "Hand-controlled maze — gyroscope & Arduino (Prayog Varsh 2022)",
             [
-                "Built encrypted note issuance and claim workflow with contract-level operational scripts.",
-                "Created end-user claim interface to simplify redemption path.",
+                "Built a dual-axis maze platform driven by orthogonal servos with gyroscope input and Arduino control for real-time X/Y motion.",
+                "Showcased at KLE Technological University as part of the first-year engineering exploration programme.",
             ],
         ),
     ]
