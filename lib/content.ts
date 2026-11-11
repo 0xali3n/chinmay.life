@@ -25,6 +25,7 @@ export const socialLinks = {
   linkedin: "https://www.linkedin.com/in/thechinmay07",
   github: "https://github.com/0xali3n",
   twitter: "https://x.com/Chinmay_io",
+  instagram: "https://www.instagram.com/chinmay.life/",
   devfolio: "https://devfolio.co/@Chinmay_io",
 } as const;
 
@@ -32,6 +33,7 @@ export const footerSocialLinks = [
   { label: "LinkedIn", href: socialLinks.linkedin },
   { label: "GitHub", href: socialLinks.github },
   { label: "X (Twitter)", href: socialLinks.twitter },
+  { label: "Instagram", href: socialLinks.instagram },
   { label: "Devfolio", href: socialLinks.devfolio },
 ] as const;
 
@@ -51,7 +53,7 @@ export const heroContent = {
     "Product-minded software engineer · full-stack, applied AI & blockchain",
   /** Short hero summary — keep scannable (2–4 sentences). */
   summary:
-    "Product-minded software engineer with experience across full-stack development, applied AI, and blockchain. Currently studying M.Sc. Computer Science at TH Bingen while based in Mainz — open to connecting with ambitious builders, startup teams, and interesting engineering opportunities.",
+    "Product-minded software engineer with experience across full-stack development, applied AI, and blockchain. I've co-founded a startup, led product development, and built projects across emerging technologies. Currently based in Mainz, Germany — open to connecting with ambitious builders, startup teams, and interesting engineering opportunities.",
   primaryCta: { label: "Selected projects", href: "#projects" },
   secondaryCta: { label: "CV (PDF)", href: "/cv.pdf", external: true },
   imageAlt: "Chinmay Patil",
@@ -75,7 +77,6 @@ export const educationItems = [
     period: "Nov 2021 — Dec 2025",
     location: "Hubballi, India",
     bullets: [
-      "CGPA: 7.41 / 10.0",
       "Focus: ML · NN & DL · Big Data · EDA · Applied Statistics (R) · DBMS · DSA · LA · Calculus",
     ] as const,
   },
@@ -565,11 +566,11 @@ export const localizedCopy = {
 export const spokenLanguages = [
   {
     language: "English",
-    level: "Full professional proficiency (IELTS 6.0)",
+    level: "B2",
   },
   {
     language: "German",
-    level: "A1 (Actively learning, targeting A2 by Summer 2027)",
+    level: "A1 (targeting A2)",
   },
   {
     language: "Kannada",
