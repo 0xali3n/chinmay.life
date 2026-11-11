@@ -10,12 +10,12 @@ export function SkillsSection({ lang = "en" }: { lang?: "en" | "de" }) {
           eyebrow: "Kompetenzen",
           title: "Skills & Werkzeuge",
           description:
-            "Für Bewerbungen schnell scanbar gruppiert; Details und Zeiträume stehen im Lebenslauf (PDF).",
+            "Für Jobbewerbungen schnell scanbar gruppiert; Details und Zeiträume stehen im Lebenslauf (PDF).",
         }
       : {
           eyebrow: "Capabilities",
           title: "Skills & tools",
-          description: "Grouped for quick scanning on applications; details and dates are on the CV (PDF).",
+          description: "Grouped for quick scanning for hiring; details and dates are on the CV (PDF).",
         };
 
   return (

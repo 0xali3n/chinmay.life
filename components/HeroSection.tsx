@@ -11,9 +11,9 @@ export function HeroSection({ lang = "en" }: { lang?: "en" | "de" }) {
       ? {
           greeting: "Hallo, ich bin",
           roleLine:
-            "M.Sc. Informatik · Angewandte KI, sichere Systeme & Full-Stack-Software",
+            "Produktorientierter Software Engineer · Full-Stack, angewandte KI & Blockchain",
           summary:
-            "Full-Stack-Engineer für zuverlässige Software über KI-gestützte Interfaces, sichere Backends und Blockchain-Produkte. M.Sc. Informatik an der TH Bingen, wohnhaft in Mainz — offen für Werkstudentenstellen, Forschungskooperation und Praktika.",
+            "Produktorientierter Software Engineer mit Erfahrung in Full-Stack-Entwicklung, angewandter KI und Blockchain. M.Sc. Informatik an der TH Bingen, wohnhaft in Mainz — offen für Werkstudentenstellen, Forschungskooperation und Praktika.",
           primaryCta: "Ausgewählte Projekte",
           secondaryCta: "Lebenslauf (PDF)",
         }

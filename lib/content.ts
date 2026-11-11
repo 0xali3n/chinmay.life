@@ -14,14 +14,14 @@ export const siteMeta = {
   /** `next/image` must use a plain path (no query). Same file as `public/icon.png`. */
   navIconSrc: "/icon.png",
   title:
-    "M.Sc. Computer Science (TH Bingen) · Applied AI, secure systems & full-stack software — portfolio",
+    "Product-minded software engineer · full-stack, applied AI & blockchain — M.Sc. CS (TH Bingen)",
   email: "thechinmay07@gmail.com",
   location: "Mainz, Germany",
   copyrightYear: 2026,
 } as const;
 
 export const socialLinks = {
-  website: "https://chinmay.io",
+  website: "https://chinmay.life",
   linkedin: "https://www.linkedin.com/in/thechinmay07",
   github: "https://github.com/0xali3n",
   twitter: "https://x.com/Chinmay_io",
@@ -48,10 +48,10 @@ export const heroContent = {
   greeting: "Hi, I'm",
   /** One line under your name */
   roleLine:
-    "M.Sc. Computer Science · Applied AI, secure systems & full-stack software",
+    "Product-minded software engineer · full-stack, applied AI & blockchain",
   /** Short hero summary — keep scannable (2–4 sentences). */
   summary:
-    "Full-stack engineer building reliable software across AI-assisted interfaces, secure backends, and blockchain products. Currently studying M.Sc. Computer Science at TH Bingen while based in Mainz — open to Werkstudent roles, research collaboration, and engineering internships.",
+    "Product-minded software engineer with experience across full-stack development, applied AI, and blockchain. Currently studying M.Sc. Computer Science at TH Bingen while based in Mainz — open to Werkstudent roles, research collaboration, and engineering internships.",
   primaryCta: { label: "Selected projects", href: "#projects" },
   secondaryCta: { label: "CV (PDF)", href: "/cv.pdf", external: true },
   imageAlt: "Chinmay Patil",
@@ -94,7 +94,7 @@ export const experienceItems = [
     logoObjectFit: "cover" as const,
     logoCoverLight: true as const,
     summaryParagraphs: [
-      "Incubated by Xyra Labs, Anthe is a next-generation DeFi social trading infrastructure built on Aptos.",
+      "Incubated by Xyra Labs, Anthe was a next-generation DeFi social trading infrastructure built on Aptos.",
     ] as const,
     bullets: [
       "Incubation & Leadership: Co-founded and scaled the platform from a hackathon prototype into a registered company, securing official incubation by Xyra Labs. Directed a cross-functional team of 5 across engineering, UI/UX, and marketing.",
@@ -488,7 +488,7 @@ export const localizedCopy = {
       entryTextById: {
         "anthe-labs": {
           summary: [
-            "Inkubiert von Xyra Labs: Anthe ist eine DeFi-Social-Trading-Infrastruktur auf Aptos.",
+            "Inkubiert von Xyra Labs: Anthe war eine DeFi-Social-Trading-Infrastruktur auf Aptos.",
           ],
           bullets: [
             "Mitgründer und Aufbau vom Hackathon-Prototyp zur registrierten Firma; Leitung eines 5-köpfigen Teams (Engineering, UI/UX, Marketing).",

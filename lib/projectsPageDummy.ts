@@ -16,7 +16,7 @@ export type ShowcaseProject = {
 export const showcaseProjectsDummy = [
   {
     id: "adgenai",
-    title: "AI Powered Advertisement and Poster Generator",
+    title: "AI-Powered Advertisement and Poster Generator",
     description:
       "AdGenAI automates campaign creative generation from prompt + product input.",
     highlights: [
