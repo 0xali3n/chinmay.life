@@ -48,9 +48,9 @@ export function ShowcaseProjectCard({
       className="group flex min-h-[22rem] flex-col rounded-xl border border-gray-200 bg-white transition-colors duration-200 hover:border-gray-300"
     >
       <div className="flex flex-1 flex-col px-6 pb-6 pt-6 md:px-7 md:pb-7 md:pt-7">
-        <h2 className="text-lg font-semibold tracking-tight text-gray-900 md:text-xl">
+        <h3 className="text-lg font-semibold tracking-tight text-gray-900 md:text-xl">
           {title}
-        </h2>
+        </h3>
         <p className="mt-3 text-sm leading-relaxed text-gray-700">{description}</p>
         <ul className="mt-3 space-y-1.5 text-sm leading-relaxed text-gray-700">
           {highlights.map((point: string) => (

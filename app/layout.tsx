@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { siteMeta, siteIconUrl, socialLinks } from "@/lib/content";
+import { JsonLd } from "@/components/JsonLd";
+import { heroContent, siteMeta, siteIconUrl, socialLinks } from "@/lib/content";
 
 const siteUrl = socialLinks.website;
-const defaultOgDescription =
-  "M.Sc. CS (TH Bingen) · experience, projects, achievements, and contact — portfolio for Werkstudent roles, internships, and collaboration.";
+const metaDescription = `${siteMeta.name} — product-minded software engineer in ${siteMeta.location}. Full-stack, applied AI, and blockchain. Portfolio of startups, products, and engineering work.`;
+const ogDescription = heroContent.summary;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,11 +20,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${siteMeta.brand} — M.Sc. CS · Applied AI & software engineering`,
-  description: `${siteMeta.name}: M.Sc. Computer Science (TH Bingen); B.E. CS (KLE Tech). Projects in applied AI, Web3, and secure systems. Based in ${siteMeta.location}.`,
+  title: `${siteMeta.brand} — Product-minded software engineer · AI & blockchain`,
+  description: metaDescription,
   applicationName: siteMeta.brand,
   authors: [{ name: siteMeta.name, url: siteUrl }],
   creator: siteMeta.name,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [{ url: siteIconUrl, type: "image/png", sizes: "any" }],
     shortcut: siteIconUrl,
@@ -34,8 +38,8 @@ export const metadata: Metadata = {
     locale: "en_DE",
     url: siteUrl,
     siteName: siteMeta.brand,
-    title: `${siteMeta.brand} — Portfolio`,
-    description: defaultOgDescription,
+    title: `${siteMeta.name} — ${siteMeta.brand}`,
+    description: ogDescription,
     images: [
       {
         url: siteIconUrl,
@@ -45,14 +49,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: siteMeta.brand,
-    description: defaultOgDescription,
+    title: `${siteMeta.name} — ${siteMeta.brand}`,
+    description: ogDescription,
     images: [siteIconUrl],
     creator: "@Chinmay_io",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
@@ -67,6 +75,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans">
+        <JsonLd />
         {children}
       </body>
     </html>
