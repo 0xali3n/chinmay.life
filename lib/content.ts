@@ -86,7 +86,7 @@ export const experienceItems = [
     id: "anthe-labs",
     company: "Anthe Labs Pvt. Ltd.",
     role: "Co-Founder",
-    period: "2025 — Present",
+    period: "2025 — 2026",
     location: "Bengaluru, India",
     logoLetter: "A",
     logoSrc: "/photos/anthe111.png",
@@ -94,7 +94,7 @@ export const experienceItems = [
     logoObjectFit: "cover" as const,
     logoCoverLight: true as const,
     summaryParagraphs: [
-      "Incubated by Xyra Labs, Anthe was a next-generation DeFi social trading infrastructure built on Aptos. The company is currently in its closing process.",
+      "Co-founded Anthé Labs and helped take the product from a hackathon prototype to a registered startup, incubated by Xyra Labs.",
     ] as const,
     bullets: [
       "Incubation & Leadership: Co-founded and scaled the platform from a hackathon prototype into a registered company, securing official incubation by Xyra Labs. Directed a cross-functional team of 5 across engineering, UI/UX, and marketing.",
@@ -488,7 +488,7 @@ export const localizedCopy = {
       entryTextById: {
         "anthe-labs": {
           summary: [
-            "Inkubiert von Xyra Labs: Anthe war eine DeFi-Social-Trading-Infrastruktur auf Aptos. Das Unternehmen befindet sich derzeit im Schließungsprozess.",
+            "Mitgründer von Anthé Labs; Produkt vom Hackathon-Prototyp zur registrierten Startup-Firma geführt, inkubiert von Xyra Labs.",
           ],
           bullets: [
             "Mitgründer und Aufbau vom Hackathon-Prototyp zur registrierten Firma; Leitung eines 5-köpfigen Teams (Engineering, UI/UX, Marketing).",

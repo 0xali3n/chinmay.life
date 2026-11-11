@@ -11,7 +11,7 @@ export function FooterContact({ lang = "en" }: { lang?: "en" | "de" }) {
           titlePrefix: "Lass uns",
           titleAccent: "verbinden",
           blurb:
-            `${siteMeta.location}. Offen für Werkstudentenstellen, Forschungszusammenarbeit sowie Softwarepraktika und Engineering-Rollen.`,
+            `${siteMeta.location}. Offen für den Austausch mit ambitionierten Buildern, Startup-Teams und spannenden Engineering-Möglichkeiten.`,
           links: "Links",
           builtWith: "Erstellt mit Next.js",
         }
@@ -20,7 +20,7 @@ export function FooterContact({ lang = "en" }: { lang?: "en" | "de" }) {
           titlePrefix: "Let's",
           titleAccent: "connect",
           blurb:
-            `${siteMeta.location}. Open to Werkstudent roles, research collaboration, and software engineering internships/jobs.`,
+            `${siteMeta.location}. Open to connecting with ambitious builders, startup teams, and interesting engineering opportunities.`,
           links: "Links",
           builtWith: "Built with Next.js",
         };
