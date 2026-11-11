@@ -51,7 +51,7 @@ export const heroContent = {
     "Product-minded software engineer · full-stack, applied AI & blockchain",
   /** Short hero summary — keep scannable (2–4 sentences). */
   summary:
-    "Product-minded software engineer with experience across full-stack development, applied AI, and blockchain. Currently studying M.Sc. Computer Science at TH Bingen while based in Mainz — open to Werkstudent roles, research collaboration, and engineering internships.",
+    "Product-minded software engineer with experience across full-stack development, applied AI, and blockchain. Currently studying M.Sc. Computer Science at TH Bingen while based in Mainz — open to connecting with ambitious builders, startup teams, and interesting engineering opportunities.",
   primaryCta: { label: "Selected projects", href: "#projects" },
   secondaryCta: { label: "CV (PDF)", href: "/cv.pdf", external: true },
   imageAlt: "Chinmay Patil",
@@ -94,7 +94,7 @@ export const experienceItems = [
     logoObjectFit: "cover" as const,
     logoCoverLight: true as const,
     summaryParagraphs: [
-      "Incubated by Xyra Labs, Anthe was a next-generation DeFi social trading infrastructure built on Aptos.",
+      "Incubated by Xyra Labs, Anthe was a next-generation DeFi social trading infrastructure built on Aptos. The company is currently in its closing process.",
     ] as const,
     bullets: [
       "Incubation & Leadership: Co-founded and scaled the platform from a hackathon prototype into a registered company, securing official incubation by Xyra Labs. Directed a cross-functional team of 5 across engineering, UI/UX, and marketing.",
@@ -488,7 +488,7 @@ export const localizedCopy = {
       entryTextById: {
         "anthe-labs": {
           summary: [
-            "Inkubiert von Xyra Labs: Anthe war eine DeFi-Social-Trading-Infrastruktur auf Aptos.",
+            "Inkubiert von Xyra Labs: Anthe war eine DeFi-Social-Trading-Infrastruktur auf Aptos. Das Unternehmen befindet sich derzeit im Schließungsprozess.",
           ],
           bullets: [
             "Mitgründer und Aufbau vom Hackathon-Prototyp zur registrierten Firma; Leitung eines 5-köpfigen Teams (Engineering, UI/UX, Marketing).",
@@ -565,7 +565,7 @@ export const localizedCopy = {
 export const spokenLanguages = [
   {
     language: "English",
-    level: "Full Professional Proficiency (IELTS B2)",
+    level: "Full professional proficiency (IELTS 6.0)",
   },
   {
     language: "German",
