@@ -8,13 +8,13 @@ export function LanguagesSection({ lang = "en" }: { lang?: "en" | "de" }) {
           eyebrow: "Kommunikation",
           title: "Sprachen",
           description:
-            "Sprachprofil für Bewerbungen an deutschen Universitäten, Praktika und wissenschaftliche Zusammenarbeit.",
+            "Sprachprofil für Studium, Werkstudentenrollen, Praktika und wissenschaftliche Zusammenarbeit in Deutschland.",
         }
       : {
           eyebrow: "Communication",
           title: "Languages",
           description:
-            "Working language profile for German university applications, internships, and research collaboration.",
+            "Working language profile for study, Werkstudent roles, internships, and research collaboration in Germany.",
         };
   return (
     <section className="border-t border-slate-100 bg-slate-50/50 py-12 md:py-14">

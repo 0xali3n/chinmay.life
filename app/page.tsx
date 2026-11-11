@@ -1,4 +1,5 @@
 import { AchievementsSection } from "@/components/AchievementsSection";
+import { EducationSection } from "@/components/EducationSection";
 import { FooterContact } from "@/components/FooterContact";
 import { HeroSection } from "@/components/HeroSection";
 import { LanguagesSection } from "@/components/LanguagesSection";
@@ -35,6 +36,7 @@ export default async function Home({
       <main className="flex-1">
         <HeroSection lang={lang} />
         <ProfileExperienceSection lang={lang} />
+        <EducationSection lang={lang} />
         <AchievementsSection lang={lang} />
         <ProjectsSection lang={lang} />
         <SkillsSection lang={lang} />

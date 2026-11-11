@@ -32,36 +32,20 @@ export const showcaseProjectsDummy = [
     deckUrl: "/internship/adgenai-pitch-deck.pdf",
   },
   {
-    id: "imagine-nft",
-    title: "Imagine NFT",
+    id: "w3chat",
+    title: "W3Chat.io — AI Agent for Web3 Actions",
     description:
-      "Imagine NFT is an AI-first NFT creation and listing pipeline on Sui.",
+      "Conversational interface to execute transfers, swaps, bridges, and automation triggers across chains.",
     highlights: [
-      "Turned text prompts into NFT image + metadata in a single guided path.",
-      "Merged generation, minting, and listing to avoid multi-tool handoffs.",
-      "Reduced creator onboarding friction with a beginner-friendly Sui flow.",
+      "Built a chat UI that drives on-chain sends, swaps, bridges, mints, and timed jobs.",
+      "Integrated AgentKit / OnchainKit for practical wallet actions with simplified UX.",
+      "Recognized in ETHGlobal Agentic Ethereum (Coinbase AgentKit pool).",
     ],
-    stack: ["React.js", "Tailwind CSS", "Sui Blockchain", "Axios", "OpenAI"],
+    stack: ["Next.js", "Coinbase AgentKit", "OnchainKit", "Hyperlane"],
     imageSrc:
-      "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=Imagine+NFT",
-    githubUrl: "https://github.com/0xali3n/imgnft.fun",
-  },
-  {
-    id: "cryptoluck-casino",
-    title: "CryptoLuck Casino",
-    description:
-      "CryptoLuck is a privacy-first casino prototype on blockchain rails.",
-    highlights: [
-      "Implemented provably fair game logic with wallet-based payout execution.",
-      "Shipped Mines, Lucky Wheel, and prediction-style rounds as core loops.",
-      "Prioritized anonymous access and quick onboarding for global users.",
-    ],
-    stack: ["React", "Node.js", "TypeScript", "Diamante", "Garden SDK"],
-    imageSrc:
-      "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=CryptoLuck",
-    githubUrl: undefined,
-    liveUrl:
-      "https://devfolio.co/projects/cryptoluck-casino-bet-win-and-play-anonymously-5353",
+      "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=W3Chat.io",
+    githubUrl: "https://github.com/0xali3n/w3chat.io",
+    liveUrl: "https://ethglobal.com/showcase/w3chat-io-d1sqn",
   },
   {
     id: "zory",
@@ -93,20 +77,35 @@ export const showcaseProjectsDummy = [
     githubUrl: "https://github.com/0xali3n/psy",
   },
   {
-    id: "gyro-maze-board",
-    title: "Hand-controlled maze — gyroscope & Arduino",
+    id: "algocash",
+    title: "AlgoCash — Digital Cash Management on Algorand",
     description:
-      "Embedded systems project: a gyroscope and Arduino drive a dual-axis servo rig so tilt maps to precise real-time X/Y motion through a maze.",
+      "Encrypted note issuance and claim workflow with contract-level operational scripts on Algorand.",
     highlights: [
-      "Gyroscope input fused with Arduino firmware for responsive hand-guided control.",
-      "Orthogonal servo mounts for independent X and Y positioning of the maze platform.",
-      "Presented at Prayog Varsh 2022 (KLE Technological University) as part of the first-year engineering exploration programme.",
+      "Built encrypted note issuance and claim paths with contract-level operational scripts.",
+      "Created an end-user claim interface to simplify the redemption path.",
+      "Tied scripts and UI so redemption works without multi-tool handoffs.",
     ],
-    stack: ["Arduino", "Gyroscope", "Servo motors", "Embedded C/C++"],
+    stack: ["Algorand", "TypeScript", "Smart contracts", "Web UI"],
     imageSrc:
-      "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=Gyro+maze",
-    linkedinUrl:
-      "https://www.linkedin.com/pulse/prayog-varsh-2022-kle-tech-chinmay-patil/",
-    videoUrl: "https://vimeo.com/744090776",
+      "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=AlgoCash",
+    githubUrl: "https://github.com/0xali3n/Algocash",
+  },
+  {
+    id: "cryptoluck-casino",
+    title: "CryptoLuck Casino",
+    description:
+      "CryptoLuck is a privacy-first casino prototype on blockchain rails.",
+    highlights: [
+      "Implemented provably fair game logic with wallet-based payout execution.",
+      "Shipped Mines, Lucky Wheel, and prediction-style rounds as core loops.",
+      "Prioritized anonymous access and quick onboarding for global users.",
+    ],
+    stack: ["React", "Node.js", "TypeScript", "Diamante", "Garden SDK"],
+    imageSrc:
+      "https://placehold.co/1200x675/f3f4f6/e5e7eb/png?text=CryptoLuck",
+    githubUrl: undefined,
+    liveUrl:
+      "https://devfolio.co/projects/cryptoluck-casino-bet-win-and-play-anonymously-5353",
   },
 ] as const satisfies readonly ShowcaseProject[];

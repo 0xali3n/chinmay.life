@@ -5,7 +5,7 @@ import { siteMeta, siteIconUrl, socialLinks } from "@/lib/content";
 
 const siteUrl = socialLinks.website;
 const defaultOgDescription =
-  "Degree, experience, projects, achievements, and contact — portfolio for applications and collaborations.";
+  "M.Sc. CS (TH Bingen) · experience, projects, achievements, and contact — portfolio for Werkstudent roles, internships, and collaboration.";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${siteMeta.brand} — MSc portfolio · CS · HCI & intelligent systems`,
-  description: `${siteMeta.name}: Bachelor (B.Tech), Computer Science (KLE Tech); portfolio for graduate applications — projects in Web3, AI-assisted software, and cybersecurity. ${siteMeta.location}.`,
+  title: `${siteMeta.brand} — M.Sc. CS · Applied AI & software engineering`,
+  description: `${siteMeta.name}: M.Sc. Computer Science (TH Bingen); B.E. CS (KLE Tech). Projects in applied AI, Web3, and secure systems. Based in ${siteMeta.location}.`,
   applicationName: siteMeta.brand,
   authors: [{ name: siteMeta.name, url: siteUrl }],
   creator: siteMeta.name,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_IN",
+    locale: "en_DE",
     url: siteUrl,
     siteName: siteMeta.brand,
     title: `${siteMeta.brand} — Portfolio`,

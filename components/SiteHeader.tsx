@@ -49,6 +49,7 @@ export function SiteHeader({ lang = "en" }: { lang?: "en" | "de" }) {
   const { head, tail } = splitBrand(siteMeta.brand);
   const deLabels: Record<string, string> = {
     Experience: "Erfahrung",
+    Education: "Studium",
     Achievements: "Erfolge",
     Projects: "Projekte",
     Contact: "Kontakt",

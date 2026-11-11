@@ -14,9 +14,9 @@ export const siteMeta = {
   /** `next/image` must use a plain path (no query). Same file as `public/icon.png`. */
   navIconSrc: "/icon.png",
   title:
-    "Bachelor of Technology (B.Tech), Computer Science (KLE Tech) · Web3, HCI-flavoured products, cybersecurity — MSc-oriented portfolio",
+    "M.Sc. Computer Science (TH Bingen) · Applied AI, secure systems & full-stack software — portfolio",
   email: "thechinmay07@gmail.com",
-  location: "Bengaluru, India",
+  location: "Mainz, Germany",
   copyrightYear: 2026,
 } as const;
 
@@ -37,6 +37,7 @@ export const footerSocialLinks = [
 
 export const navLinks = [
   { label: "Experience", href: "#experience" },
+  { label: "Education", href: "#education" },
   { label: "Achievements", href: "#achievements" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
@@ -47,14 +48,38 @@ export const heroContent = {
   greeting: "Hi, I'm",
   /** One line under your name */
   roleLine:
-    "Computer Science engineer focused on secure systems, intelligent interfaces, and applied AI",
+    "M.Sc. Computer Science · Applied AI, secure systems & full-stack software",
   /** Short hero summary — keep scannable (2–4 sentences). */
   summary:
-    "I design and build full-stack systems where usability, data reliability, and trust boundaries are equally important. This portfolio supports my applications to German Master's programs and highlights project depth relevant to research, internships, and engineering roles.",
+    "Full-stack engineer building reliable software across AI-assisted interfaces, secure backends, and blockchain products. Currently studying M.Sc. Computer Science at TH Bingen while based in Mainz — open to Werkstudent roles, research collaboration, and engineering internships.",
   primaryCta: { label: "Selected projects", href: "#projects" },
   secondaryCta: { label: "CV (PDF)", href: "/cv.pdf", external: true },
   imageAlt: "Chinmay Patil",
 } as const;
+
+export const educationItems = [
+  {
+    id: "th-bingen",
+    school: "Technische Hochschule Bingen",
+    degree: "Master of Science, Computer Science",
+    period: "Oct 2026 — Present",
+    location: "Bingen, Germany",
+    bullets: [
+      "Software engineering, applied AI, and intelligent systems.",
+    ] as const,
+  },
+  {
+    id: "kle-tech",
+    school: "KLE Technological University",
+    degree: "Bachelor of Engineering, Computer Science",
+    period: "Nov 2021 — Dec 2025",
+    location: "Hubballi, India",
+    bullets: [
+      "CGPA: 7.41 / 10.0",
+      "Focus: ML · NN & DL · Big Data · EDA · Applied Statistics (R) · DBMS · DSA · LA · Calculus",
+    ] as const,
+  },
+] as const;
 
 export const experienceItems = [
   {
@@ -338,7 +363,7 @@ export const achievementsContent = {
 } as const;
 
 export const skillsContent = {
-  Languages: ["C", "C++", "Python", "JavaScript"],
+  Languages: ["C", "C++", "Python", "JavaScript", "TypeScript"],
   "Web & frameworks": [
     "Next.js",
     "React",
@@ -347,7 +372,23 @@ export const skillsContent = {
     "Tailwind CSS",
     "Postman",
   ],
-  Blockchain: ["Solidity", "Sui", "NFTs", "DeFi", "DAO", "On-chain analysis"],
+  "AI / ML / Data": [
+    "Machine learning",
+    "Deep learning",
+    "Big Data",
+    "EDA",
+    "Stats / R",
+    "SQL / DBMS",
+  ],
+  Blockchain: [
+    "Solidity",
+    "Aptos",
+    "Sui",
+    "NFTs",
+    "DeFi",
+    "DAO",
+    "On-chain analysis",
+  ],
   Cybersecurity: [
     "Kali Linux",
     "Nmap",
@@ -381,13 +422,14 @@ export const localizedCopy = {
             "S3-basierte Asset-Ablage für Wiederverwendung und Review umgesetzt.",
           ],
         },
-        "imagine-nft": {
-          title: "Imagine NFT",
-          description: "KI-gestützte NFT-Erstellung und Listing-Pipeline auf Sui.",
+        w3chat: {
+          title: "W3Chat.io — KI-Agent für Web3-Aktionen",
+          description:
+            "Konversationelle Oberfläche für Transfers, Swaps, Bridges und Automationen über Chains hinweg.",
           highlights: [
-            "Text-Prompts in Bild + NFT-Metadaten in einem geführten Flow umgewandelt.",
-            "Generierung, Minting und Listing in derselben UX zusammengeführt.",
-            "Onboarding-Friction für Creator durch einfachen Sui-Flow reduziert.",
+            "Chat-UI gebaut, die On-Chain-Aktionen und zeitgesteuerte Jobs auslöst.",
+            "AgentKit/OnchainKit-Ansatz für praktische Wallet-Aktionen mit vereinfachter UX integriert.",
+            "Bei ETHGlobal Agentic Ethereum mit Coinbase-Pool-Preis ausgezeichnet.",
           ],
         },
         "cryptoluck-casino": {
@@ -415,6 +457,16 @@ export const localizedCopy = {
             "Rust/Actix-Backend für privacy-first Messaging-State-Handling entworfen.",
             "Psy-kompatible Proof/State-Transitions modelliert.",
             "Simulierte ZK/Poseidon2-Module mit swap-fähigen Interfaces umgesetzt.",
+          ],
+        },
+        algocash: {
+          title: "AlgoCash — Digital Cash Management auf Algorand",
+          description:
+            "Verschlüsselte Note-Issuance und Claim-Workflows mit Contract-Scripts auf Algorand.",
+          highlights: [
+            "Verschlüsselte Note-Issuance und Claim-Pfad mit Contract-Level-Scripts gebaut.",
+            "Endnutzer-Claim-Interface erstellt, um den Einlöseprozess zu vereinfachen.",
+            "Operational Scripts und UI so verbunden, dass Redemption ohne Extra-Tooling klappt.",
           ],
         },
         "gyro-maze-board": {
@@ -517,7 +569,7 @@ export const spokenLanguages = [
   },
   {
     language: "German",
-    level: "A1 (Actively learning, targeting A2 by Winter 2026)",
+    level: "A1 (Actively learning, targeting A2 by Summer 2027)",
   },
   {
     language: "Kannada",

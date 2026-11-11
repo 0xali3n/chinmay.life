@@ -11,9 +11,9 @@ export function HeroSection({ lang = "en" }: { lang?: "en" | "de" }) {
       ? {
           greeting: "Hallo, ich bin",
           roleLine:
-            "Informatikingenieur mit Fokus auf sichere Systeme, intelligente Interfaces und angewandte KI",
+            "M.Sc. Informatik · Angewandte KI, sichere Systeme & Full-Stack-Software",
           summary:
-            "Ich entwickle Full-Stack-Systeme, bei denen Usability, Datenzuverlässigkeit und Sicherheitsgrenzen gleichermaßen zählen. Dieses Portfolio unterstützt meine Bewerbungen für Masterprogramme in Deutschland sowie Praktika und Werkstudentenrollen.",
+            "Full-Stack-Engineer für zuverlässige Software über KI-gestützte Interfaces, sichere Backends und Blockchain-Produkte. M.Sc. Informatik an der TH Bingen, wohnhaft in Mainz — offen für Werkstudentenstellen, Forschungskooperation und Praktika.",
           primaryCta: "Ausgewählte Projekte",
           secondaryCta: "Lebenslauf (PDF)",
         }
